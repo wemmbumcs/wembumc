@@ -1,1177 +1,437 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Unperter Smp | Minecraft Server</title>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-        :root {
-            --primary: #8C56D4;
-            --primary-light: #b88bea;
-            --primary-dark: #6635a5;
-
-            --background: #09070d;
-            --card: #13101a;
-            --card-hover: #1a1422;
-
-            --white: #ffffff;
-            --gray: #aaa4b3;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Inter", sans-serif;
-            background: var(--background);
-            color: var(--white);
-            overflow-x: hidden;
-        }
-
-        /* Background Glow */
-
-        body::before {
-            content: "";
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            top: -200px;
-            left: -200px;
-            background: var(--primary);
-            opacity: 0.15;
-            filter: blur(150px);
-            z-index: -1;
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            right: -200px;
-            bottom: -200px;
-            background: #54218f;
-            opacity: 0.12;
-            filter: blur(150px);
-            z-index: -1;
-        }
-
-        /* Navigation */
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-
-            padding: 18px 7%;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            background: rgba(9, 7, 13, 0.75);
-            backdrop-filter: blur(15px);
-
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-
-            z-index: 999;
-        }
-
-        .logo {
-            font-size: 21px;
-            font-weight: 900;
-            color: white;
-            text-decoration: none;
-            letter-spacing: -1px;
-        }
-
-        .logo span {
-            color: var(--primary-light);
-        }
-
-        nav ul {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        nav ul a {
-            color: #c8c2d0;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: 0.25s;
-        }
-
-        nav ul a:hover {
-            color: var(--primary-light);
-        }
-
-        .nav-button {
-            background: var(--primary);
-            color: white !important;
-
-            padding: 10px 17px;
-            border-radius: 9px;
-
-            box-shadow: 0 0 25px rgba(140,86,212,0.25);
-        }
-
-        /* Hero */
-
-        .hero {
-            min-height: 100vh;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            text-align: center;
-
-            padding: 140px 7% 80px;
-        }
-
-        .hero-content {
-            max-width: 950px;
-        }
-
-        .badge {
-            display: inline-block;
-
-            padding: 9px 15px;
-
-            border-radius: 100px;
-
-            background: rgba(140,86,212,0.10);
-            border: 1px solid rgba(140,86,212,0.35);
-
-            color: var(--primary-light);
-
-            font-size: 12px;
-            font-weight: 800;
-
-            letter-spacing: 1.5px;
-
-            margin-bottom: 25px;
-        }
-
-        .hero h1 {
-            font-size: clamp(55px, 9vw, 105px);
-
-            line-height: 0.95;
-
-            letter-spacing: -6px;
-
-            margin-bottom: 30px;
-        }
-
-        .hero h1 span {
-            color: var(--primary);
-
-            text-shadow:
-                0 0 20px rgba(140,86,212,0.4),
-                0 0 60px rgba(140,86,212,0.2);
-        }
-
-        .hero-description {
-            max-width: 680px;
-
-            margin: auto;
-
-            color: var(--gray);
-
-            font-size: 17px;
-
-            line-height: 1.8;
-        }
-
-        /* Buttons */
-
-        .buttons {
-            margin-top: 35px;
-
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 15px 24px;
-
-            border-radius: 11px;
-
-            text-decoration: none;
-
-            font-size: 14px;
-            font-weight: 800;
-
-            cursor: pointer;
-
-            transition: 0.25s;
-        }
-
-        .primary-btn {
-            background: var(--primary);
-            color: white;
-
-            border: none;
-
-            box-shadow:
-                0 10px 35px rgba(140,86,212,0.25);
-        }
-
-        .primary-btn:hover {
-            background: #9b67e1;
-
-            transform: translateY(-3px);
-
-            box-shadow:
-                0 15px 45px rgba(140,86,212,0.4);
-        }
-
-        .secondary-btn {
-            background: var(--card);
-
-            color: white;
-
-            border: 1px solid #302739;
-        }
-
-        .secondary-btn:hover {
-            border-color: var(--primary);
-
-            transform: translateY(-3px);
-        }
-
-        /* Server IP */
-
-        .server-box {
-            max-width: 570px;
-
-            margin: 50px auto 0;
-
-            padding: 17px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 15px;
-
-            background: rgba(19,16,26,0.9);
-
-            border: 1px solid rgba(140,86,212,0.3);
-
-            border-radius: 15px;
-        }
-
-        .server-label {
-            text-align: left;
-
-            color: #756e80;
-
-            font-size: 10px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 2px;
-        }
-
-        .server-ip {
-            margin-top: 5px;
-
-            font-size: 16px;
-
-            font-weight: 800;
-
-            color: #eadcff;
-        }
-
-        .copy-button {
-            border: none;
-
-            background: var(--primary);
-
-            color: white;
-
-            padding: 11px 17px;
-
-            border-radius: 8px;
-
-            cursor: pointer;
-
-            font-weight: 800;
-        }
-
-        .copy-button:hover {
-            background: var(--primary-dark);
-        }
-
-        /* Sections */
-
-        section {
-            padding: 110px 7%;
-        }
-
-        .section-header {
-            text-align: center;
-
-            max-width: 700px;
-
-            margin: 0 auto 55px;
-        }
-
-        .section-header small {
-            color: var(--primary-light);
-
-            text-transform: uppercase;
-
-            letter-spacing: 3px;
-
-            font-weight: 800;
-
-            font-size: 11px;
-        }
-
-        .section-header h2 {
-            font-size: 43px;
-
-            margin-top: 12px;
-        }
-
-        .section-header p {
-            color: var(--gray);
-
-            line-height: 1.7;
-
-            margin-top: 15px;
-        }
-
-        /* Features */
-
-        .features {
-            max-width: 1100px;
-
-            margin: auto;
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 20px;
-        }
-
-        .feature {
-            padding: 30px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    #17121e,
-                    #0f0c14
-                );
-
-            border: 1px solid #292230;
-
-            border-radius: 18px;
-
-            transition: 0.3s;
-        }
-
-        .feature:hover {
-            transform: translateY(-7px);
-
-            background: var(--card-hover);
-
-            border-color:
-                rgba(140,86,212,0.55);
-
-            box-shadow:
-                0 20px 50px rgba(0,0,0,0.3);
-        }
-
-        .feature-icon {
-            width: 52px;
-            height: 52px;
-
-            display: grid;
-            place-items: center;
-
-            border-radius: 13px;
-
-            background:
-                rgba(140,86,212,0.13);
-
-            font-size: 23px;
-
-            margin-bottom: 20px;
-        }
-
-        .feature h3 {
-            font-size: 19px;
-
-            margin-bottom: 10px;
-        }
-
-        .feature p {
-            color: var(--gray);
-
-            font-size: 14px;
-
-            line-height: 1.7;
-        }
-
-        /* About */
-
-        .about {
-            max-width: 1100px;
-
-            margin: auto;
-
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap: 70px;
-
-            align-items: center;
-        }
-
-        .about h2 {
-            font-size: 45px;
-
-            line-height: 1.1;
-
-            margin-bottom: 20px;
-        }
-
-        .about h2 span {
-            color: var(--primary);
-        }
-
-        .about p {
-            color: var(--gray);
-
-            line-height: 1.8;
-        }
-
-        /* Stats */
-
-        .stats {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 15px;
-        }
-
-        .stat {
-            padding: 30px;
-
-            text-align: center;
-
-            background: var(--card);
-
-            border: 1px solid #292230;
-
-            border-radius: 16px;
-        }
-
-        .stat strong {
-            display: block;
-
-            color: var(--primary-light);
-
-            font-size: 31px;
-
-            margin-bottom: 7px;
-        }
-
-        .stat span {
-            color: var(--gray);
-
-            font-size: 12px;
-        }
-
-        /* Rules */
-
-        .rules {
-            max-width: 800px;
-
-            margin: auto;
-        }
-
-        .rule {
-            display: flex;
-
-            gap: 18px;
-
-            padding: 20px;
-
-            margin-bottom: 12px;
-
-            background: var(--card);
-
-            border: 1px solid #292230;
-
-            border-radius: 13px;
-        }
-
-        .rule-number {
-            color: var(--primary-light);
-
-            font-weight: 900;
-        }
-
-        .rule p {
-            color: #c7c1ce;
-        }
-
-        /* CTA */
-
-        .cta {
-            max-width: 1000px;
-
-            margin: auto;
-
-            text-align: center;
-
-            padding: 75px 30px;
-
-            border-radius: 25px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(140,86,212,0.25),
-                    rgba(45,20,70,0.15)
-                ),
-                var(--card);
-
-            border:
-                1px solid
-                rgba(140,86,212,0.35);
-        }
-
-        .cta h2 {
-            font-size: 43px;
-
-            margin-bottom: 15px;
-        }
-
-        .cta p {
-            color: var(--gray);
-
-            margin-bottom: 30px;
-        }
-
-        /* Footer */
-
-        footer {
-            padding: 35px 7%;
-
-            text-align: center;
-
-            color: #68616f;
-
-            font-size: 13px;
-
-            border-top:
-                1px solid #211b28;
-        }
-
-        footer span {
-            color: var(--primary-light);
-        }
-
-        /* Mobile */
-
-        @media (max-width: 800px) {
-
-            nav ul {
-                display: none;
-            }
-
-            .hero h1 {
-                letter-spacing: -4px;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            .about {
-                grid-template-columns: 1fr;
-
-                gap: 40px;
-            }
-
-            .section-header h2,
-            .about h2,
-            .cta h2 {
-                font-size: 32px;
-            }
-
-            .server-box {
-                flex-direction: column;
-            }
-
-            .server-label {
-                text-align: center;
-            }
-
-            .copy-button {
-                width: 100%;
-            }
-
-            .stats {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UnperterSMP | Rank Shop</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    font-family:Arial,sans-serif;
+    color:white;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 20% 20%,#4b176e55,transparent 35%),
+        radial-gradient(circle at 80% 80%,#7416a944,transparent 35%),
+        #09040f;
+}
+
+nav{
+    height:52px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#0b0710;
+    border-bottom:1px solid #2b1b38;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+}
+
+.logo span{color:#ad6cff}
+
+.home{
+    color:#ccc;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.container{
+    max-width:1200px;
+    margin:48px auto;
+    padding:0 20px;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.title h1{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+.title span{color:#a855f7}
+
+.title p{
+    color:#aaa;
+}
+
+.username{
+    max-width:500px;
+    margin:0 auto 40px;
+}
+
+.username input{
+    width:100%;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #493056;
+    outline:none;
+    background:#130b1c;
+    color:white;
+    text-align:center;
+    font-size:15px;
+}
+
+.ranks{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+}
+
+.rank{
+    --color:#a855f7;
+
+    padding:28px 22px;
+    min-height:570px;
+
+    border:1px solid var(--color);
+    border-radius:22px;
+
+    background:
+        linear-gradient(145deg,#ffffff08,#00000022),
+        #120d18;
+
+    box-shadow:0 0 30px #0008;
+
+    text-align:center;
+
+    transition:.3s;
+}
+
+.rank:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 35px color-mix(
+        in srgb,var(--color) 30%,transparent
+    );
+}
+
+.vip{--color:#4cff55}
+.mvp{--color:#4da3ff}
+.elite{--color:#a855f7}
+.legend{--color:#ffad00}
+
+.icon{
+    width:80px;
+    height:80px;
+    margin:auto auto 20px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:20px;
+
+    font-size:35px;
+
+    background:#ffffff08;
+    border:1px solid var(--color);
+
+    box-shadow:0 0 25px color-mix(
+        in srgb,var(--color) 25%,transparent
+    );
+}
+
+.rank h2{
+    color:var(--color);
+    font-size:27px;
+    margin-bottom:10px;
+}
+
+.desc{
+    color:#aaa;
+    font-size:13px;
+    min-height:42px;
+}
+
+.price{
+    margin:28px 0;
+
+    color:var(--color);
+    font-size:34px;
+    font-weight:900;
+
+    text-shadow:0 0 15px var(--color);
+}
+
+.price small{
+    font-size:10px;
+    color:#777;
+    text-shadow:none;
+}
+
+ul{
+    list-style:none;
+    text-align:left;
+    margin-bottom:25px;
+}
+
+li{
+    padding:10px 0;
+    border-bottom:1px solid #ffffff0b;
+    color:#ccc;
+    font-size:13px;
+}
+
+li::before{
+    content:"✓";
+    color:var(--color);
+    font-weight:bold;
+    margin-right:10px;
+}
+
+.buy{
+    width:100%;
+    padding:15px;
+
+    border:none;
+    border-radius:10px;
+
+    background:var(--color);
+    color:#09070d;
+
+    font-weight:900;
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.buy:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.15);
+}
+
+@media(max-width:900px){
+    .ranks{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .ranks{
+        grid-template-columns:1fr;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- NAVIGATION -->
+<nav>
+    <div class="logo">
+        Unperter<span>SMP</span>
+    </div>
 
-    <nav>
+    <a href="index.html" class="home">
+        ← HOME
+    </a>
+</nav>
 
-        <a href="#" class="logo">
-            8C<span>SMP</span>
-        </a>
+<div class="container">
 
-        <ul>
+    <div class="title">
+        <h1>CHOOSE YOUR <span>RANK</span></h1>
+        <p>Upgrade your Unperter SMP experience.</p>
+    </div>
 
-            <li>
-                <a href="#features">
-                    Features
-                </a>
-            </li>
+    <div class="username">
+        <input
+            id="username"
+            type="text"
+            maxlength="16"
+            placeholder="🎮 Enter Minecraft Username"
+        >
+    </div>
 
-            <li>
-                <a href="#about">
-                    About
-                </a>
-            </li>
+    <div class="ranks">
 
-            <li>
-                <a href="#rules">
-                    Rules
-                </a>
-            </li>
+        <!-- VIP -->
+        <div class="rank vip">
 
-            <li>
-                <a href="#join" class="nav-button">
-                    Join Now
-                </a>
-            </li>
+            <div class="icon">🟢</div>
 
-        </ul>
+            <h2>VIP</h2>
 
-    </nav>
-
-
-    <!-- HERO -->
-
-    <header class="hero">
-
-        <div class="hero-content">
-
-            <div class="badge">
-                ✦ MINECRAFT SURVIVAL MULTIPLAYER
-            </div>
-
-            <h1>
-                WELCOME TO<br>
-                <span>Unperter Smp</span>
-            </h1>
-
-            <p class="hero-description">
-                A brand-new Minecraft world is waiting for you.
-                Survive, build, explore, fight and create your own
-                story with the Unperter Smp community.
+            <p class="desc">
+                A great starting rank for new players.
             </p>
 
-            <div class="buttons">
-
-                <a
-                    href="#join"
-                    class="btn primary-btn"
-                >
-                    ⛏ PLAY NOW
-                </a>
-
-                <a
-                    href="#features"
-                    class="btn secondary-btn"
-                >
-                    EXPLORE SERVER
-                </a>
-
+            <div class="price">
+                $2.99
+                <small>/ LIFETIME</small>
             </div>
 
+            <ul>
+                <li>VIP Prefix</li>
+                <li>3 Homes</li>
+                <li>/hat</li>
+                <li>VIP Chat Color</li>
+            </ul>
 
-            <!-- SERVER IP -->
-
-            <div class="server-box">
-
-                <div>
-
-                    <div class="server-label">
-                        Server IP
-                    </div>
-
-                    <div
-                        class="server-ip"
-                        id="serverIP"
-                    >
-                        UnperterSmppp.aternos.me
-                    </div>
-
-                </div>
-
-                <button
-                    class="copy-button"
-                    onclick="copyIP()"
-                    id="copyButton"
-                >
-                    COPY IP
-                </button>
-
-            </div>
+            <button class="buy"
+                onclick="buyRank('VIP','2.99')">
+                BUY VIP
+            </button>
 
         </div>
 
-    </header>
 
+        <!-- MVP -->
+        <div class="rank mvp">
 
-    <!-- FEATURES -->
+            <div class="icon">🔵</div>
 
-    <section id="features">
+            <h2>MVP</h2>
 
-        <div class="section-header">
-
-            <small>
-                Why Unperter Smp?
-            </small>
-
-            <h2>
-                One World. Endless Adventures.
-            </h2>
-
-            <p>
-                Everything you need for an exciting,
-                memorable and community-driven Minecraft SMP.
+            <p class="desc">
+                More abilities for active players.
             </p>
 
+            <div class="price">
+                $5.99
+                <small>/ LIFETIME</small>
+            </div>
+
+            <ul>
+                <li>MVP Prefix</li>
+                <li>5 Homes</li>
+                <li>/fly</li>
+                <li>MVP Chat Color</li>
+            </ul>
+
+            <button class="buy"
+                onclick="buyRank('MVP','5.99')">
+                BUY MVP
+            </button>
+
         </div>
 
 
-        <div class="features">
+        <!-- ELITE -->
+        <div class="rank elite">
 
-            <div class="feature">
+            <div class="icon">🟣</div>
 
-                <div class="feature-icon">
-                    🌎
-                </div>
+            <h2>ELITE</h2>
 
-                <h3>
-                    Open World
-                </h3>
-
-                <p>
-                    Explore a massive world, collect resources,
-                    discover new places and build your own base.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    ⚔️
-                </div>
-
-                <h3>
-                    PvP & Survival
-                </h3>
-
-                <p>
-                    Survive dangerous encounters, fight your enemies
-                    and protect everything you've built.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    👥
-                </div>
-
-                <h3>
-                    Community
-                </h3>
-
-                <p>
-                    Meet new players, create teams and make
-                    unforgettable memories together.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    🏠
-                </div>
-
-                <h3>
-                    Build
-                </h3>
-
-                <p>
-                    Create cities, bases, kingdoms or anything
-                    you can imagine.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    🎉
-                </div>
-
-                <h3>
-                    Events
-                </h3>
-
-                <p>
-                    Join special events, compete with other players
-                    and earn exciting rewards.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    ✨
-                </div>
-
-                <h3>
-                    Unique Experience
-                </h3>
-
-                <p>
-                    Create your own adventure and write your own
-                    story in the world of Unperter Smp.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ABOUT -->
-
-    <section id="about">
-
-        <div class="about">
-
-            <div>
-
-                <h2>
-                    It's more than<br>
-                    <span>just a server.</span>
-                </h2>
-
-                <p>
-                    Unperter Smp is a place where you can start from
-                    nothing, build your own empire, make new friends
-                    and create unforgettable Minecraft moments.
-                </p>
-
-                <div
-                    class="buttons"
-                    style="justify-content:flex-start;"
-                >
-
-                    <a
-                        href="#join"
-                        class="btn primary-btn"
-                    >
-                        JOIN Unperter Smp →
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <div class="stats">
-
-                <div class="stat">
-
-                    <strong>
-                        24/7
-                    </strong>
-
-                    <span>
-                        SERVER ONLINE
-                    </span>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <strong>
-                        1.21+
-                    </strong>
-
-                    <span>
-                        MINECRAFT VERSION
-                    </span>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <strong>
-                        ∞
-                    </strong>
-
-                    <span>
-                        ADVENTURE
-                    </span>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <strong>
-                        100%
-                    </strong>
-
-                    <span>
-                        COMMUNITY
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- RULES -->
-
-    <section id="rules">
-
-        <div class="section-header">
-
-            <small>
-                Server Rules
-            </small>
-
-            <h2>
-                Play Fair. Have Fun.
-            </h2>
-
-            <p>
-                Help us keep Unperter Smp friendly, fair and enjoyable
-                for everyone.
+            <p class="desc">
+                A powerful rank for dedicated players.
             </p>
 
+            <div class="price">
+                $9.99
+                <small>/ LIFETIME</small>
+            </div>
+
+            <ul>
+                <li>Elite Prefix</li>
+                <li>8 Homes</li>
+                <li>/fly</li>
+                <li>/enderchest</li>
+                <li>Exclusive Cosmetics</li>
+            </ul>
+
+            <button class="buy"
+                onclick="buyRank('ELITE','9.99')">
+                BUY ELITE
+            </button>
+
         </div>
 
 
-        <div class="rules">
+        <!-- LEGEND -->
+        <div class="rank legend">
 
-            <div class="rule">
+            <div class="icon">👑</div>
 
-                <div class="rule-number">
-                    01
-                </div>
+            <h2>LEGEND</h2>
 
-                <p>
-                    No hacks, cheats or unfair advantages.
-                </p>
-
-            </div>
-
-
-            <div class="rule">
-
-                <div class="rule-number">
-                    02
-                </div>
-
-                <p>
-                    Respect all players and members of the community.
-                </p>
-
-            </div>
-
-
-            <div class="rule">
-
-                <div class="rule-number">
-                    03
-                </div>
-
-                <p>
-                    No spam or unauthorized advertising.
-                </p>
-
-            </div>
-
-
-            <div class="rule">
-
-                <div class="rule-number">
-                    04
-                </div>
-
-                <p>
-                    Do not grief or destroy other players' builds.
-                </p>
-
-            </div>
-
-
-            <div class="rule">
-
-                <div class="rule-number">
-                    05
-                </div>
-
-                <p>
-                    Follow the instructions of the server staff.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- JOIN -->
-
-    <section id="join">
-
-        <div class="cta">
-
-            <h2>
-                Ready to enter the world?
-            </h2>
-
-            <p>
-                Connect to Minecraft and start your journey
-                on Unperter Smp today.
+            <p class="desc">
+                The ultimate Unperter SMP rank.
             </p>
 
-            <div class="buttons">
-
-                <button
-                    class="btn primary-btn"
-                    onclick="copyIP()"
-                >
-                    ⛏ COPY SERVER IP
-                </button>
-
-
-                <!-- CHANGE THIS DISCORD LINK -->
-
-                <a
-                    href="https://discord.gg/gcsXrDsnS"
-                    target="_blank"
-                    class="btn secondary-btn"
-                >
-                    💬 DISCORD COMMUNITY
-                </a>
-
+            <div class="price">
+                $19.99
+                <small>/ LIFETIME</small>
             </div>
+
+            <ul>
+                <li>Legend Prefix</li>
+                <li>15 Homes</li>
+                <li>/fly</li>
+                <li>/enderchest</li>
+                <li>Exclusive Cosmetics</li>
+                <li>Special Legend Tag</li>
+            </ul>
+
+            <button class="buy"
+                onclick="buyRank('LEGEND','19.99')">
+                BUY LEGEND
+            </button>
 
         </div>
 
-    </section>
+    </div>
+</div>
 
 
-    <!-- FOOTER -->
+<script>
 
-    <footer>
+function buyRank(rank, price){
 
-        © 2026
-        <span>
-           Unperter Smp
-        </span>
-        — Made for Minecraft players.
+    const username =
+        document.getElementById("username").value.trim();
 
-    </footer>
+    if(!username){
+        alert("⚠️ Please enter your Minecraft username!");
+        document.getElementById("username").focus();
+        return;
+    }
+
+    const ok = confirm(
+        "🛒 UNPERTER SMP\n\n" +
+        "Rank: " + rank + "\n" +
+        "Username: " + username + "\n" +
+        "Price: $" + price + "\n\n" +
+        "Continue to purchase?"
+    );
+
+    if(!ok) return;
 
 
-    <!-- JAVASCRIPT -->
+    /*
+    ===================================
+    THAY LINK BÊN DƯỚI BẰNG LINK TEBEX
+    ===================================
+    */
 
-    <script>
+    const links = {
 
-        function copyIP() {
+        VIP:
+        "https://YOUR-STORE.tebex.io/package/VIP",
 
-            const ip =
-                document.getElementById("serverIP").innerText;
+        MVP:
+        "https://YOUR-STORE.tebex.io/package/MVP",
 
-            const button =
-                document.getElementById("copyButton");
+        ELITE:
+        "https://YOUR-STORE.tebex.io/package/ELITE",
 
-            navigator.clipboard.writeText(ip);
+        LEGEND:
+        "https://YOUR-STORE.tebex.io/package/LEGEND"
 
-            button.innerText = "✓ COPIED!";
+    };
 
-            setTimeout(() => {
 
-                button.innerText = "COPY IP";
+    window.location.href = links[rank];
+}
 
-            }, 1500);
-
-        }
-
-    </script>
+</script>
 
 </body>
 </html>
