@@ -1,437 +1,778 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UnperterSMP | Rank Shop</title>
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-    font-family:Arial,sans-serif;
-    color:white;
-    min-height:100vh;
-    background:
-        radial-gradient(circle at 20% 20%,#4b176e55,transparent 35%),
-        radial-gradient(circle at 80% 80%,#7416a944,transparent 35%),
-        #09040f;
-}
-
-nav{
-    height:52px;
-    padding:0 7%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    background:#0b0710;
-    border-bottom:1px solid #2b1b38;
-}
-
-.logo{
-    font-size:22px;
-    font-weight:900;
-}
-
-.logo span{color:#ad6cff}
-
-.home{
-    color:#ccc;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-.container{
-    max-width:1200px;
-    margin:48px auto;
-    padding:0 20px;
-}
-
-.title{
-    text-align:center;
-    margin-bottom:35px;
-}
-
-.title h1{
-    font-size:45px;
-    margin-bottom:10px;
-}
-
-.title span{color:#a855f7}
-
-.title p{
-    color:#aaa;
-}
-
-.username{
-    max-width:500px;
-    margin:0 auto 40px;
-}
-
-.username input{
-    width:100%;
-    padding:15px;
-    border-radius:10px;
-    border:1px solid #493056;
-    outline:none;
-    background:#130b1c;
-    color:white;
-    text-align:center;
-    font-size:15px;
-}
-
-.ranks{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:22px;
-}
-
-.rank{
-    --color:#a855f7;
-
-    padding:28px 22px;
-    min-height:570px;
-
-    border:1px solid var(--color);
-    border-radius:22px;
-
-    background:
-        linear-gradient(145deg,#ffffff08,#00000022),
-        #120d18;
-
-    box-shadow:0 0 30px #0008;
-
-    text-align:center;
-
-    transition:.3s;
-}
-
-.rank:hover{
-    transform:translateY(-8px);
-    box-shadow:0 0 35px color-mix(
-        in srgb,var(--color) 30%,transparent
-    );
-}
-
-.vip{--color:#4cff55}
-.mvp{--color:#4da3ff}
-.elite{--color:#a855f7}
-.legend{--color:#ffad00}
-
-.icon{
-    width:80px;
-    height:80px;
-    margin:auto auto 20px;
-
-    display:grid;
-    place-items:center;
-
-    border-radius:20px;
-
-    font-size:35px;
-
-    background:#ffffff08;
-    border:1px solid var(--color);
-
-    box-shadow:0 0 25px color-mix(
-        in srgb,var(--color) 25%,transparent
-    );
-}
-
-.rank h2{
-    color:var(--color);
-    font-size:27px;
-    margin-bottom:10px;
-}
-
-.desc{
-    color:#aaa;
-    font-size:13px;
-    min-height:42px;
-}
-
-.price{
-    margin:28px 0;
-
-    color:var(--color);
-    font-size:34px;
-    font-weight:900;
-
-    text-shadow:0 0 15px var(--color);
-}
-
-.price small{
-    font-size:10px;
-    color:#777;
-    text-shadow:none;
-}
-
-ul{
-    list-style:none;
-    text-align:left;
-    margin-bottom:25px;
-}
-
-li{
-    padding:10px 0;
-    border-bottom:1px solid #ffffff0b;
-    color:#ccc;
-    font-size:13px;
-}
-
-li::before{
-    content:"✓";
-    color:var(--color);
-    font-weight:bold;
-    margin-right:10px;
-}
-
-.buy{
-    width:100%;
-    padding:15px;
-
-    border:none;
-    border-radius:10px;
-
-    background:var(--color);
-    color:#09070d;
-
-    font-weight:900;
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.buy:hover{
-    transform:translateY(-2px);
-    filter:brightness(1.15);
-}
-
-@media(max-width:900px){
-    .ranks{
-        grid-template-columns:repeat(2,1fr);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Altarle SMP | Official Rank Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #0a0c10;
+      --bg-card: rgba(18, 22, 34, 0.75);
+      --bg-card-hover: rgba(24, 30, 48, 0.9);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f0f4fc;
+      --text-muted: #8b9bb4;
+      --accent-blood: #ff334b;
+      --accent-knink: #00d2ff;
+      --accent-lava: #ff7700;
+      --accent-mythic: #c840e6;
+      --accent-gold: #f59e0b;
+      --discord: #5865F2;
+      --radius: 16px;
     }
-}
 
-@media(max-width:600px){
-    .ranks{
-        grid-template-columns:1fr;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
     }
-}
-</style>
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(200, 64, 230, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 25%, rgba(255, 51, 75, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 50% 85%, rgba(0, 210, 255, 0.08) 0%, transparent 50%),
+        repeating-linear-gradient(rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 40px);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .brand-font {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.5px;
+    }
+
+    /* --- Navigation --- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      background: rgba(10, 12, 16, 0.85);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 5%;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent-mythic), var(--accent-lava));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 20px rgba(200, 64, 230, 0.4);
+    }
+
+    .brand-title {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .version-tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      background: rgba(0, 210, 255, 0.15);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      color: var(--accent-knink);
+      border-radius: 6px;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .currency-select {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .btn-discord {
+      background: var(--discord);
+      color: white;
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s;
+    }
+
+    .btn-discord:hover {
+      background: #4752c4;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+    }
+
+    .btn-cart {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 9px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      transition: 0.2s;
+    }
+
+    .btn-cart:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: var(--accent-blood);
+      color: white;
+      font-size: 11px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      text-align: center;
+      padding: 70px 20px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5.5vw, 56px);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 30%, #c5d3ec 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .server-ip-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(18, 22, 34, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 12px 24px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .server-ip-box:hover {
+      border-color: var(--accent-knink);
+      transform: translateY(-2px);
+    }
+
+    .server-ip-box code {
+      font-family: 'Fira Code', monospace;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent-knink);
+    }
+
+    /* --- Player IGN Lookup Bar --- */
+    .ign-bar {
+      max-width: 500px;
+      margin: 40px auto 10px;
+      display: flex;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 8px 14px;
+      gap: 12px;
+    }
+
+    .ign-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: #111;
+      border: 1px solid var(--border-color);
+      image-rendering: pixelated;
+    }
+
+    .ign-bar input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-main);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    /* --- Ranks Container --- */
+    .ranks-container {
+      max-width: 1280px;
+      margin: 40px auto 80px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .rank-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 32px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .rank-card:hover {
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
+    }
+
+    .rank-card.bloodrith { --card-accent: var(--accent-blood); }
+    .rank-card.kninksword { --card-accent: var(--accent-knink); }
+    .rank-card.lavagarma { --card-accent: var(--accent-lava); }
+    .rank-card.mythical { 
+      --card-accent: var(--accent-mythic); 
+      border-color: rgba(200, 64, 230, 0.4);
+      box-shadow: 0 0 30px rgba(200, 64, 230, 0.15);
+    }
+
+    .rank-card:hover {
+      border-color: var(--card-accent);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(var(--card-accent), 0.2);
+    }
+
+    .rank-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .rank-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--card-accent);
+      border: 1px solid var(--card-accent);
+      margin-bottom: 12px;
+    }
+
+    .rank-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--card-accent);
+      margin-bottom: 6px;
+    }
+
+    .rank-price {
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .rank-price span {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .perks-list {
+      list-style: none;
+      margin: 20px 0 30px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .perk-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #d1d9e6;
+    }
+
+    .perk-item i {
+      color: var(--card-accent);
+      font-size: 13px;
+    }
+
+    .perk-item code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-buy {
+      background: var(--card-accent);
+      color: #fff;
+      border: none;
+      padding: 13px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-buy:hover {
+      filter: brightness(1.15);
+      transform: translateY(-2px);
+    }
+
+    .btn-inspect {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-inspect:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* --- Drawer & Modal --- */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -450px;
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      background: #10141f;
+      border-left: 1px solid var(--border-color);
+      z-index: 200;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -15px 0 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .cart-drawer.active {
+      right: 0;
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 150;
+      display: none;
+    }
+
+    .drawer-overlay.active {
+      display: block;
+    }
+
+    /* --- Toast Notification --- */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #161b26;
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent-knink);
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 300;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+  </style>
 </head>
-
 <body>
 
-<nav>
-    <div class="logo">
-        Unperter<span>SMP</span>
-    </div>
-
-    <a href="index.html" class="home">
-        ← HOME
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="brand">
+      <div class="brand-icon"><i class="fa-solid fa-cube"></i></div>
+      <div>
+        <div class="brand-title">Altarle SMP</div>
+        <span class="version-tag">Minecraft v1.21.11</span>
+      </div>
     </a>
-</nav>
 
-<div class="container">
+    <div class="nav-actions">
+      <select class="currency-select" id="currencySelect" onchange="changeCurrency(this.value)">
+        <option value="USD">USD ($)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="GBP">GBP (£)</option>
+        <option value="CAD">CAD ($)</option>
+        <option value="AUD">AUD ($)</option>
+        <option value="JPY">JPY (¥)</option>
+      </select>
 
-    <div class="title">
-        <h1>CHOOSE YOUR <span>RANK</span></h1>
-        <p>Upgrade your Unperter SMP experience.</p>
+      <a href="https://discord.gg/yJa26bwyP" target="_blank" class="btn-discord">
+        <i class="fa-brands fa-discord"></i> Discord
+      </a>
+
+      <button class="btn-cart" onclick="toggleCart()">
+        <i class="fa-solid fa-basket-shopping"></i> Cart
+        <div class="cart-badge" id="cartBadge">0</div>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="hero-badge">
+      <i class="fa-solid fa-crown"></i> 100% EULA Compliant Store &bull; v1.21.11 Ready
+    </div>
+    <h1>Ascend Through The Ranks</h1>
+    <p>Unlock cosmetic commands, elevated home claims, exclusive starter kits, and prestige perks on <strong>Altarle SMP</strong>.</p>
+    
+    <div class="server-ip-box" onclick="copyIP()">
+      <i class="fa-solid fa-server" style="color: var(--accent-knink);"></i>
+      <div>
+        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Click to copy IP</div>
+        <code>altarlesmp.sadhost.com</code>
+      </div>
+      <i class="fa-regular fa-clone" style="color: var(--text-muted); margin-left: 8px;"></i>
     </div>
 
-    <div class="username">
-        <input
-            id="username"
-            type="text"
-            maxlength="16"
-            placeholder="🎮 Enter Minecraft Username"
-        >
+    <!-- Live Minecraft Player Lookup -->
+    <div class="ign-bar">
+      <img id="playerSkin" class="ign-avatar" src="https://minotar.net/avatar/Steve/40" alt="Avatar">
+      <input type="text" id="ignInput" placeholder="Enter your Minecraft username..." value="Steve" oninput="updateSkin(this.value)">
+    </div>
+  </section>
+
+  <!-- Ranks Grid -->
+  <section class="ranks-container">
+
+    <!-- RANK 1: BLOODRITH -->
+    <div class="rank-card bloodrith">
+      <div class="rank-header">
+        <div class="rank-badge">Tier I &bull; Warrior</div>
+        <div class="rank-title">Bloodrith</div>
+        <div class="rank-price" id="price-bloodrith">$4.99 <span>/ Lifetime</span></div>
+      </div>
+      <ul class="perks-list">
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Prefix: <b style="color:var(--accent-blood)">[Bloodrith]</b></span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span><b>3</b> Maximum <code>/sethome</code> points</span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Access to <code>/hat</code> & <code>/near</code></span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Basic Hunger Replenish <code>/feed</code></span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Daily Combat <code>/kit bloodrith</code></span></li>
+      </ul>
+      <div class="card-actions">
+        <button class="btn-buy" onclick="addToCart('Bloodrith', 4.99)">Add To Cart</button>
+      </div>
     </div>
 
-    <div class="ranks">
-
-        <!-- VIP -->
-        <div class="rank vip">
-
-            <div class="icon">🟢</div>
-
-            <h2>VIP</h2>
-
-            <p class="desc">
-                A great starting rank for new players.
-            </p>
-
-            <div class="price">
-                $2.99
-                <small>/ LIFETIME</small>
-            </div>
-
-            <ul>
-                <li>VIP Prefix</li>
-                <li>3 Homes</li>
-                <li>/hat</li>
-                <li>VIP Chat Color</li>
-            </ul>
-
-            <button class="buy"
-                onclick="buyRank('VIP','2.99')">
-                BUY VIP
-            </button>
-
-        </div>
-
-
-        <!-- MVP -->
-        <div class="rank mvp">
-
-            <div class="icon">🔵</div>
-
-            <h2>MVP</h2>
-
-            <p class="desc">
-                More abilities for active players.
-            </p>
-
-            <div class="price">
-                $5.99
-                <small>/ LIFETIME</small>
-            </div>
-
-            <ul>
-                <li>MVP Prefix</li>
-                <li>5 Homes</li>
-                <li>/fly</li>
-                <li>MVP Chat Color</li>
-            </ul>
-
-            <button class="buy"
-                onclick="buyRank('MVP','5.99')">
-                BUY MVP
-            </button>
-
-        </div>
-
-
-        <!-- ELITE -->
-        <div class="rank elite">
-
-            <div class="icon">🟣</div>
-
-            <h2>ELITE</h2>
-
-            <p class="desc">
-                A powerful rank for dedicated players.
-            </p>
-
-            <div class="price">
-                $9.99
-                <small>/ LIFETIME</small>
-            </div>
-
-            <ul>
-                <li>Elite Prefix</li>
-                <li>8 Homes</li>
-                <li>/fly</li>
-                <li>/enderchest</li>
-                <li>Exclusive Cosmetics</li>
-            </ul>
-
-            <button class="buy"
-                onclick="buyRank('ELITE','9.99')">
-                BUY ELITE
-            </button>
-
-        </div>
-
-
-        <!-- LEGEND -->
-        <div class="rank legend">
-
-            <div class="icon">👑</div>
-
-            <h2>LEGEND</h2>
-
-            <p class="desc">
-                The ultimate Unperter SMP rank.
-            </p>
-
-            <div class="price">
-                $19.99
-                <small>/ LIFETIME</small>
-            </div>
-
-            <ul>
-                <li>Legend Prefix</li>
-                <li>15 Homes</li>
-                <li>/fly</li>
-                <li>/enderchest</li>
-                <li>Exclusive Cosmetics</li>
-                <li>Special Legend Tag</li>
-            </ul>
-
-            <button class="buy"
-                onclick="buyRank('LEGEND','19.99')">
-                BUY LEGEND
-            </button>
-
-        </div>
-
+    <!-- RANK 2: KNINKSWORD -->
+    <div class="rank-card kninksword">
+      <div class="rank-header">
+        <div class="rank-badge">Tier II &bull; Specialist</div>
+        <div class="rank-title">Kninksword</div>
+        <div class="rank-price" id="price-kninksword">$9.99 <span>/ Lifetime</span></div>
+      </div>
+      <ul class="perks-list">
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Prefix: <b style="color:var(--accent-knink)">[Kninksword]</b></span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Includes <b>all Bloodrith perks</b></span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span><b>5</b> Maximum <code>/sethome</code> points</span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Portable <code>/craft</code> & <code>/anvil</code></span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Advanced Gear <code>/kit kninksword</code></span></li>
+      </ul>
+      <div class="card-actions">
+        <button class="btn-buy" onclick="addToCart('Kninksword', 9.99)">Add To Cart</button>
+      </div>
     </div>
-</div>
 
+    <!-- RANK 3: LAVAGARMA -->
+    <div class="rank-card lavagarma">
+      <div class="rank-header">
+        <div class="rank-badge">Tier III &bull; Champion</div>
+        <div class="rank-title">Lavagarma</div>
+        <div class="rank-price" id="price-lavagarma">$19.99 <span>/ Lifetime</span></div>
+      </div>
+      <ul class="perks-list">
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Prefix: <b style="color:var(--accent-lava)">[Lavagarma]</b></span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Inherits <b>all lower rank perks</b></span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span><b>8</b> Maximum <code>/sethome</code> points</span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Survival Flight <code>/fly</code> (Allowed zones)</span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Molten Armour <code>/kit lavagarma</code></span></li>
+      </ul>
+      <div class="card-actions">
+        <button class="btn-buy" onclick="addToCart('Lavagarma', 19.99)">Add To Cart</button>
+      </div>
+    </div>
 
-<script>
+    <!-- RANK 4: MYTHICAL -->
+    <div class="rank-card mythical">
+      <div class="rank-header">
+        <div class="rank-badge">Tier IV &bull; Supreme</div>
+        <div class="rank-title">Mythical</div>
+        <div class="rank-price" id="price-mythical">$39.99 <span>/ Lifetime</span></div>
+      </div>
+      <ul class="perks-list">
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Prefix: <b style="color:var(--accent-mythic)">[MYTHICAL]</b></span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Inherits <b>ALL server permissions</b></span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span><b>15</b> Maximum <code>/sethome</code> points</span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Instant <code>/heal</code> & <code>/repair all</code></span></li>
+        <li class="perk-item"><i class="fa-solid fa-check"></i> <span>Priority Server Queue Pass</span></li>
+      </ul>
+      <div class="card-actions">
+        <button class="btn-buy" onclick="addToCart('Mythical', 39.99)">Add To Cart</button>
+      </div>
+    </div>
 
-function buyRank(rank, price){
+  </section>
 
-    const username =
-        document.getElementById("username").value.trim();
+  <!-- Cart Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px;">
+      <h3 style="font-size: 20px;">Your Shopping Basket</h3>
+      <button onclick="toggleCart()" style="background:none; border:none; color:var(--text-muted); font-size:20px; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+    </div>
 
-    if(!username){
-        alert("⚠️ Please enter your Minecraft username!");
-        document.getElementById("username").focus();
-        return;
-    }
+    <div id="cartItemsList" style="flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:12px;">
+      <div style="text-align:center; color:var(--text-muted); margin-top:50px;">Your cart is currently empty.</div>
+    </div>
 
-    const ok = confirm(
-        "🛒 UNPERTER SMP\n\n" +
-        "Rank: " + rank + "\n" +
-        "Username: " + username + "\n" +
-        "Price: $" + price + "\n\n" +
-        "Continue to purchase?"
-    );
+    <div style="border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: 20px;">
+      <div style="display:flex; justify-content:space-between; margin-bottom: 16px; font-weight:700;">
+        <span>Total:</span>
+        <span id="cartTotalDisplay">$0.00</span>
+      </div>
+      <button class="btn-buy" style="width:100%;" onclick="checkout()">Proceed To Checkout</button>
+    </div>
+  </div>
 
-    if(!ok) return;
+  <!-- Toast -->
+  <div class="toast" id="toastBox">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toastMsg">Action completed successfully</span>
+  </div>
 
+  <!-- Footer -->
+  <footer>
+    <p>Altarle SMP &copy; 2026. Compatible with Minecraft Java Edition 1.21.11.</p>
+    <p style="margin-top: 8px; font-size: 12px;">We are not affiliated with Mojang Studios or Microsoft Corporation.</p>
+  </footer>
 
-    /*
-    ===================================
-    THAY LINK BÊN DƯỚI BẰNG LINK TEBEX
-    ===================================
-    */
-
-    const links = {
-
-        VIP:
-        "https://YOUR-STORE.tebex.io/package/VIP",
-
-        MVP:
-        "https://YOUR-STORE.tebex.io/package/MVP",
-
-        ELITE:
-        "https://YOUR-STORE.tebex.io/package/ELITE",
-
-        LEGEND:
-        "https://YOUR-STORE.tebex.io/package/LEGEND"
-
+  <script>
+    // Rates & Multipliers
+    const exchangeRates = {
+      USD: { symbol: '$', rate: 1.0 },
+      EUR: { symbol: '€', rate: 0.92 },
+      GBP: { symbol: '£', rate: 0.79 },
+      CAD: { symbol: 'CA$', rate: 1.36 },
+      AUD: { symbol: 'AU$', rate: 1.52 },
+      JPY: { symbol: '¥', rate: 155.0 }
     };
 
+    const basePrices = {
+      Bloodrith: 4.99,
+      Kninksword: 9.99,
+      Lavagarma: 19.99,
+      Mythical: 39.99
+    };
 
-    window.location.href = links[rank];
-}
+    let currentCurrency = 'USD';
+    let cart = [];
 
-</script>
+    function changeCurrency(curr) {
+      currentCurrency = curr;
+      const { symbol, rate } = exchangeRates[curr];
+      for (const [rank, price] of Object.entries(basePrices)) {
+        const converted = curr === 'JPY' ? Math.round(price * rate) : (price * rate).toFixed(2);
+        document.getElementById(`price-${rank.toLowerCase()}`).innerHTML = `${symbol}${converted} <span>/ Lifetime</span>`;
+      }
+      renderCart();
+    }
 
+    function updateSkin(ign) {
+      const clean = ign.trim() || 'Steve';
+      document.getElementById('playerSkin').src = `https://minotar.net/avatar/${clean}/40`;
+    }
+
+    function copyIP() {
+      navigator.clipboard.writeText('altarlesmp.sadhost.com');
+      showToast('Copied altarlesmp.sadhost.com to clipboard!');
+    }
+
+    function showToast(text) {
+      const t = document.getElementById('toastBox');
+      document.getElementById('toastMsg').innerText = text;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    function toggleCart() {
+      document.getElementById('cartDrawer').classList.toggle('active');
+      document.getElementById('drawerOverlay').classList.toggle('active');
+    }
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      document.getElementById('cartBadge').innerText = cart.length;
+      showToast(`Added ${name} Rank to your cart!`);
+      renderCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      document.getElementById('cartBadge').innerText = cart.length;
+      renderCart();
+    }
+
+    function renderCart() {
+      const list = document.getElementById('cartItemsList');
+      const { symbol, rate } = exchangeRates[currentCurrency];
+      
+      if (cart.length === 0) {
+        list.innerHTML = `<div style="text-align:center; color:var(--text-muted); margin-top:50px;">Your cart is currently empty.</div>`;
+        document.getElementById('cartTotalDisplay').innerText = `${symbol}0.00`;
+        return;
+      }
+
+      let total = 0;
+      list.innerHTML = cart.map((item, idx) => {
+        const itemPrice = currentCurrency === 'JPY' ? Math.round(item.price * rate) : (item.price * rate).toFixed(2);
+        total += item.price * rate;
+        return `
+          <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.04); padding:10px 14px; border-radius:10px;">
+            <div>
+              <div style="font-weight:700;">${item.name}</div>
+              <div style="font-size:13px; color:var(--text-muted);">${symbol}${itemPrice}</div>
+            </div>
+            <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:var(--accent-blood); cursor:pointer;"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('cartTotalDisplay').innerText = currentCurrency === 'JPY' ? `${symbol}${Math.round(total)}` : `${symbol}${total.toFixed(2)}`;
+    }
+
+    function checkout() {
+      const ign = document.getElementById('ignInput').value.trim();
+      if (!ign) {
+        alert('Please enter your Minecraft username first!');
+        return;
+      }
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+      alert(`Order initialized for player: ${ign}\nRedirecting to secure gateway... (Demo Mode)`);
+      cart = [];
+      document.getElementById('cartBadge').innerText = '0';
+      renderCart();
+      toggleCart();
+    }
+  </script>
 </body>
 </html>
