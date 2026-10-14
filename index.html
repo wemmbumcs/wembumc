@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Altarle SMP Store - Plugin & Texture Pack</title>
+    <title>ALTARLESMP STORE</title>
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #151d30;
-            --card-border: #232f48;
-            --accent-blue: #38bdf8;
-            --accent-purple: #a855f7;
-            --accent-gold: #f59e0b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-color: #060913;
+            --card-bg: #0d1322;
+            --card-border: #1a253d;
+            --accent-cyan: #00d8ff;
+            --accent-cyan-hover: #00b0d0;
+            --input-bg: #090d18;
+            --text-main: #ffffff;
+            --text-muted: #64748b;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
@@ -29,317 +29,264 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-        }
-
-        /* Header / Navbar */
-        header {
-            background-color: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--card-border);
-            padding: 15px 5%;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: var(--accent-blue);
-        }
-
-        /* Hero Banner */
-        .hero {
-            text-align: center;
-            padding: 60px 20px 40px;
-            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.1) 0%, transparent 60%);
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            font-weight: 800;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Store Container */
-        .store-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 20px 60px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            width: 100%;
-        }
-
-        /* Card Component */
-        .product-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-blue);
-            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.15);
-        }
-
-        .product-card.gold-tier {
-            border-color: var(--accent-gold);
-            background: linear-gradient(180deg, rgba(245, 158, 11, 0.05) 0%, var(--card-bg) 100%);
-        }
-
-        .product-card.gold-tier:hover {
-            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.2);
-        }
-
-        .badge {
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: linear-gradient(135deg, var(--accent-gold), #d97706);
-            color: #000;
-            font-weight: 800;
-            font-size: 0.75rem;
-            padding: 4px 12px;
-            border-radius: 20px;
+        /* Store Header Title */
+        .store-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
             text-transform: uppercase;
         }
 
-        .card-header h3 {
-            font-size: 1.6rem;
-            margin-bottom: 8px;
+        .store-title span {
+            color: var(--accent-cyan);
         }
 
-        .price-tag {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--accent-blue);
-            margin: 15px 0 20px;
-        }
-
-        .gold-tier .price-tag {
-            color: var(--accent-gold);
-        }
-
-        .features-list {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .features-list li {
-            margin-bottom: 12px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            font-size: 0.95rem;
-        }
-
-        .features-list li span {
-            color: #10b981;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-blue);
-            color: #0b0f19;
-        }
-
-        .btn-primary:hover {
-            background-color: #0284c7;
-            color: #ffffff;
-        }
-
-        .btn-gold {
-            background-color: var(--accent-gold);
-            color: #000;
-        }
-
-        .btn-gold:hover {
-            background-color: #b45309;
-            color: #fff;
-        }
-
-        /* Modal Purchase */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
+        /* Login Card */
+        .login-card {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
-            padding: 30px;
             border-radius: 12px;
-            width: 90%;
-            max-width: 450px;
-            position: relative;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-muted);
-        }
-
-        .form-group {
+            padding: 20px 24px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             margin-bottom: 15px;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
+        .username-field {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 10px;
-            background: var(--bg-color);
-            border: 1px solid var(--card-border);
+        .player-head {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-cyan);
+            background-color: var(--input-bg);
+            object-fit: cover;
+            image-rendering: pixelated;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .input-group label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .input-group input {
+            background-color: var(--input-bg);
+            border: 1px solid var(--accent-cyan);
             border-radius: 6px;
-            color: var(--text-main);
+            color: var(--accent-cyan);
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 8px 12px;
             outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        /* Footer */
-        footer {
-            margin-top: auto;
-            text-align: center;
-            padding: 20px;
-            border-top: 1px solid var(--card-border);
-            color: var(--text-muted);
-            font-size: 0.85rem;
+        .input-group input:focus {
+            box-shadow: 0 0 10px rgba(0, 216, 255, 0.3);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            max-width: 440px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--accent-cyan);
+            font-size: 1rem;
+            font-weight: 800;
+            padding: 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--accent-cyan);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 216, 255, 0.4);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .product-features li {
+            margin-bottom: 8px;
+        }
+
+        .buy-btn {
+            background-color: var(--accent-cyan);
+            color: #000;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .buy-btn:hover {
+            background-color: var(--accent-cyan-hover);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">ALTARLE SMP</div>
-        <nav>
-            <a href="#store">Sản Phẩm</a>
-            <a href="#support">Hỗ Trợ Discord</a>
-        </nav>
-    </header>
+    <h1 class="store-title">ALTARLESMP <span>STORE</span></h1>
 
-    <section class="hero">
-        <h1>Nâng Cấp Server Minecraft Của Bạn</h1>
-        <p>Bảo mật chống đúp portal tối tân kết hợp tài nguyên Texture Pack độc quyền dành riêng cho dòng máy chủ SMP.</p>
-    </section>
+    <!-- Username Input Form -->
+    <div class="login-card">
+        <div class="username-field">
+            <img id="playerHead" class="player-head" src="https://mc-heads.net/avatar/Niko064255/64" alt="Skin Head">
+            <div class="input-group">
+                <label for="username">MINECRAFT USERNAME</label>
+                <input type="text" id="username" value="Niko064255" autocomplete="off" spellcheck="false">
+            </div>
+        </div>
+    </div>
 
-    <main class="store-container" id="store">
-        <!-- Gói Altarle SMP+ -->
+    <button class="submit-btn" id="enterBtn" onclick="enterStore()">CONTINUE TO STORE</button>
+
+    <!-- Products Grid -->
+    <div class="products-grid" id="productsGrid">
+        <!-- Altarle SMP+ -->
         <div class="product-card">
-            <div class="card-header">
-                <h3>Altarle SMP+</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">Bảo Mật & Cơ Bản</p>
+            <div>
+                <div class="product-title">Altarle SMP+</div>
+                <div class="product-price">$9.99</div>
+                <ul class="product-features">
+                    <li>✔ Anti-Dupe Portal Protection</li>
+                    <li>✔ Basic Interface Texture Pack</li>
+                    <li>✔ Server Performance Optimization</li>
+                    <li>✔ Configurable Settings File</li>
+                </ul>
             </div>
-            <div class="price-tag">150.000đ</div>
-            <ul class="features-list">
-                <li><span>✓</span> Plugin Anti-Dupe Portal (Nether & End)</li>
-                <li><span>✓</span> Texture Pack Giao Diện Cơ Bản</li>
-                <li><span>✓</span> Chống Lag & Tối Ưu Chunk Event</li>
-                <li><span>✓</span> Cấu Hình Config Tùy Chỉnh</li>
-            </ul>
-            <button class="btn btn-primary" onclick="openCheckout('Altarle SMP+', '150.000đ')">Mua Ngay</button>
+            <button class="buy-btn" onclick="checkout('Altarle SMP+')">BUY NOW</button>
         </div>
 
-        <!-- Gói Altarle SMP++ -->
+        <!-- Altarle SMP++ -->
         <div class="product-card">
-            <div class="card-header">
-                <h3>Altarle SMP++</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">Plugin & Custom Texture Pack</p>
+            <div>
+                <div class="product-title">Altarle SMP++</div>
+                <div class="product-price">$19.99</div>
+                <ul class="product-features">
+                    <li>✔ All SMP+ Features Included</li>
+                    <li>✔ Custom Weapons & Armor Texture Pack</li>
+                    <li>✔ Custom GUI Menu System</li>
+                    <li>✔ Extra Gameplay Plugins</li>
+                </ul>
             </div>
-            <div class="price-tag">300.000đ</div>
-            <ul class="features-list">
-                <li><span>✓</span> Toàn bộ tính năng gói SMP+</li>
-                <li><span>✓</span> Custom Texture Pack (Vũ Khí, Giáp)</li>
-                <li><span>✓</span> Giao diện Custom GUI Menu</li>
-                <li><span>✓</span> Bộ Plugin Bổ Sung Gameplay SMP</li>
-            </ul>
-            <button class="btn btn-primary" onclick="openCheckout('Altarle SMP++', '300.000đ')">Mua Ngay</button>
+            <button class="buy-btn" onclick="checkout('Altarle SMP++')">BUY NOW</button>
         </div>
 
-        <!-- Gói Altarle SMP+++ -->
-        <div class="product-card gold-tier">
-            <div class="badge">KHUYÊN DÙNG</div>
-            <div class="card-header">
-                <h3>Altarle SMP+++</h3>
-                <p style="color: var(--accent-gold); font-size: 0.85rem;">Full Plugin & Full Texture Pack</p>
+        <!-- Altarle SMP+++ -->
+        <div class="product-card" style="border-color: var(--accent-cyan);">
+            <div>
+                <div class="product-title">Altarle SMP+++</div>
+                <div class="product-price">$29.99</div>
+                <ul class="product-features">
+                    <li>✔ Full Plugin Suite (Economy, Black Market)</li>
+                    <li>✔ Full Texture Pack (3D Models & Effects)</li>
+                    <li>✔ Ready Plug & Play Installation</li>
+                    <li>✔ 1:1 Setup Support & Lifetime Updates</li>
+                </ul>
             </div>
-            <div class="price-tag">500.000đ</div>
-            <ul class="features-list">
-                <li><span>✓</span> <b>FULL Plugin Suite</b> (Kinh tế, Chợ đen, Anti-bot)</li>
-                <li><span>✓</span> <b>FULL Texture Pack</b> (Models 3D & Chiêu thức)</li>
-                <li><span>✓</span> Tích hợp Plug & Play (Dùng ngay)</li>
-                <li><span>✓</span> Hỗ trợ Cài đặt 1:1 + Cập nhật trọn đời</li>
-            </ul>
-            <button class="btn btn-gold" onclick="openCheckout('Altarle SMP+++', '500.000đ')">Mua Ngay</button>
+            <button class="buy-btn" onclick="checkout('Altarle SMP+++')">BUY NOW</button>
         </div>
-    </main>
+    </div>
 
-    <!-- Modal Thanh Toán -->
-    <div class="modal" id="checkoutModal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeCheckout()">&times;</span>
-            <h3 id="modalPackageTitle" style="margin-bottom: 5px;">Thanh Toán</h3>
-            <p id="modalPackagePrice" style="color: var(--accent-blue); font-weight: bold; margin-bottom: 20px;"></p>
-            
-            <form onsubmit="handlePayment(event)">
+    <script>
+        const usernameInput = document.getElementById('username');
+        const playerHead = document.getElementById('playerHead');
+        const productsGrid = document.getElementById('productsGrid');
+
+        // Dynamically update Minecraft head on typing
+        usernameInput.addEventListener('input', function() {
+            const name = this.value.trim() || 'Steve';
+            playerHead.src = `https://mc-heads.net/avatar/${name}/64`;
+        });
+
+        function enterStore() {
+            const username = usernameInput.value.trim();
+            if(!username) {
+                alert('Please enter your Minecraft Username!');
+                return;
+            }
+            productsGrid.style.display = 'grid';
+            productsGrid.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function checkout(packageName) {
+            const username = usernameInput.value.trim();
+            alert(`Account: ${username}\nSelected Package: ${packageName}\n\nProceeding to checkout...`);
+        }
+    </script>
+</body>
+</html>
