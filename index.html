@@ -1,37 +1,196 @@
-packages:
-  altarlesmp_plugin:
-    id: 1
-    name: "altarlesmp plugin"
-    price: 19.00
-    currency: "USD"
-    expiry: "Lifetime"
-    description:
-      - "&7• &fCustom Armor"
-    commands:
-      - "ea give armor %player%"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AltarleSMP Store</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  altarlesmp_plugin_plus:
-    id: 2
-    name: "altarlesmp plugin+"
-    price: 30.00
-    currency: "USD"
-    expiry: "Lifetime"
-    description:
-      - "&7• &fCustom Weapons"
-    commands:
-      - "ea give weapon %player%"
+        body {
+            background-color: #0a1118;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
 
-  altarlesmp_plugin_plus_plus:
-    id: 3
-    name: "altarlesmp plugin++"
-    price: 100.00
-    currency: "USD"
-    expiry: "Lifetime"
-    description:
-      - "&7• &fCustom Armor"
-      - "&7• &fCustom Weapons"
-      - "&7• &fExclusive Texture Pack"
-    commands:
-      - "ea give armor %player%"
-      - "ea give weapon %player%"
-      - "resourcepack send %player%"
+        h1 {
+            margin-bottom: 40px;
+            color: #00ffaa;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 255, 170, 0.4);
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .card {
+            background: #121e2b;
+            border: 2px solid #00a8ff;
+            border-radius: 14px;
+            padding: 30px 25px;
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.3);
+        }
+
+        .card.featured {
+            border-color: #00ffaa;
+            box-shadow: 0 0 20px rgba(0, 255, 170, 0.25);
+        }
+
+        .card.featured:hover {
+            box-shadow: 0 8px 30px rgba(0, 255, 170, 0.4);
+        }
+
+        .badge {
+            position: absolute;
+            top: -14px;
+            background: #00ffaa;
+            color: #0a1118;
+            padding: 4px 14px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #00d2ff;
+            text-align: center;
+        }
+
+        .card.featured .title {
+            color: #00ffaa;
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        .price span {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .features {
+            list-style: none;
+            width: 100%;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            color: #dcdde1;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .features li::before {
+            content: "✓";
+            color: #00ffaa;
+            margin-right: 12px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #00a8ff, #0097e6);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .card.featured .btn {
+            background: linear-gradient(135deg, #00ffaa, #00a8ff);
+            color: #0a1118;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AltarleSMP Web Store</h1>
+
+    <div class="container">
+        <!-- Tier 1 -->
+        <div class="card">
+            <div class="title">altarlesmp plugin</div>
+            <div class="price">$19.00 <span>/ Lifetime</span></div>
+            <ul class="features">
+                <li>Custom Armor</li>
+            </ul>
+            <button class="btn">Add To Cart</button>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="card">
+            <div class="title">altarlesmp plugin+</div>
+            <div class="price">$30.00 <span>/ Lifetime</span></div>
+            <ul class="features">
+                <li>Custom Weapons</li>
+            </ul>
+            <button class="btn">Add To Cart</button>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="card featured">
+            <div class="badge">BEST VALUE</div>
+            <div class="title">altarlesmp plugin++</div>
+            <div class="price">$100.00 <span>/ Lifetime</span></div>
+            <ul class="features">
+                <li>Custom Armor</li>
+                <li>Custom Weapons</li>
+                <li>Texture Pack</li>
+            </ul>
+            <button class="btn">Add To Cart</button>
+        </div>
+    </div>
+
+</body>
+</html>
