@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AltarleSMP Web Store</title>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-dark: #030a16;
             --card-bg: #0a172c;
             --ocean-blue: #0077ff;
             --electric-cyan: #00f0ff;
-            --deep-blue: #0044aaa3;
             --text-primary: #ffffff;
             --text-secondary: #82a0c8;
             --border-blue: rgba(0, 170, 255, 0.3);
@@ -22,14 +19,11 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
         body {
             background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 119, 255, 0.25) 0%, transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
             color: var(--text-primary);
             min-height: 100vh;
             padding: 50px 20px;
@@ -38,28 +32,25 @@
             align-items: center;
         }
 
-        /* Header Section */
         header {
             text-align: center;
             max-width: 800px;
             width: 100%;
-            margin-bottom: 45px;
+            margin-bottom: 40px;
         }
 
         h1 {
             font-size: 2.8rem;
             color: #ffffff;
-            text-shadow: 0 0 20px rgba(0, 170, 255, 0.6);
             margin-bottom: 25px;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
 
         h1 span {
             color: var(--electric-cyan);
         }
 
-        /* Player Name Input Container */
         .user-input-box {
             background: var(--card-bg);
             border: 2px solid var(--border-blue);
@@ -68,17 +59,15 @@
             display: inline-flex;
             align-items: center;
             gap: 18px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .user-avatar {
-            width: 52px;
-            height: 52px;
-            border-radius: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
             background: #000;
             border: 2px solid var(--electric-cyan);
-            box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
             image-rendering: pixelated;
         }
 
@@ -93,29 +82,25 @@
             font-size: 0.8rem;
             color: var(--text-secondary);
             text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-weight: bold;
         }
 
         .input-group input {
             background: var(--bg-dark);
             border: 1px solid var(--border-blue);
             color: var(--electric-cyan);
-            padding: 10px 16px;
+            padding: 10px 15px;
             border-radius: 8px;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: bold;
             outline: none;
-            transition: all 0.3s ease;
             width: 220px;
         }
 
         .input-group input:focus {
             border-color: var(--electric-cyan);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
         }
 
-        /* Store Cards Layout */
         .store-container {
             display: flex;
             flex-wrap: wrap;
@@ -130,19 +115,16 @@
             border: 2px solid var(--border-blue);
             border-radius: 18px;
             padding: 35px 28px;
-            width: 330px;
+            width: 320px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
         }
 
         .card:hover {
-            transform: translateY(-10px);
             border-color: var(--electric-cyan);
-            box-shadow: 0 15px 40px rgba(0, 119, 255, 0.35);
         }
 
         .card.featured {
@@ -150,22 +132,16 @@
             box-shadow: 0 0 30px rgba(0, 240, 255, 0.25);
         }
 
-        .card.featured:hover {
-            box-shadow: 0 15px 45px rgba(0, 240, 255, 0.45);
-        }
-
         .badge {
             position: absolute;
             top: -14px;
-            background: linear-gradient(135deg, var(--ocean-blue), var(--electric-cyan));
+            background: var(--electric-cyan);
             color: #030a16;
             padding: 5px 18px;
             font-size: 0.75rem;
             font-weight: 800;
             border-radius: 20px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.4);
         }
 
         .card-title {
@@ -178,7 +154,6 @@
 
         .card.featured .card-title {
             color: var(--electric-cyan);
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
         }
 
         .price {
@@ -208,12 +183,13 @@
             font-size: 0.95rem;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .features li i {
+        .features li::before {
+            content: "✓";
             color: var(--electric-cyan);
-            font-size: 1.1rem;
+            font-weight: bold;
         }
 
         .btn {
@@ -221,27 +197,22 @@
             padding: 14px;
             border: none;
             border-radius: 10px;
-            background: linear-gradient(135deg, #0055ff, var(--ocean-blue));
+            background: var(--ocean-blue);
             color: #ffffff;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0, 85, 255, 0.4);
         }
 
         .card.featured .btn {
-            background: linear-gradient(135deg, var(--ocean-blue), var(--electric-cyan));
+            background: var(--electric-cyan);
             color: #030a16;
-            box-shadow: 0 4px 20px rgba(0, 240, 255, 0.4);
         }
 
         .btn:hover {
-            opacity: 0.92;
-            transform: scale(1.03);
+            opacity: 0.9;
         }
 
-        /* Toast Notification */
         .cart-toast {
             position: fixed;
             bottom: 25px;
@@ -251,7 +222,6 @@
             color: #fff;
             padding: 16px 28px;
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.35);
             display: none;
             align-items: center;
             gap: 14px;
@@ -264,17 +234,15 @@
     <header>
         <h1>AltarleSMP <span>Store</span></h1>
         
-        <!-- Player Name Selection -->
         <div class="user-input-box">
             <img id="player-avatar" class="user-avatar" src="https://mc-heads.net/avatar/Niko064255" alt="Skin Head">
             <div class="input-group">
                 <label for="username">Minecraft Username</label>
-                <input type="text" id="username" value="Niko064255" placeholder="Enter player name...">
+                <input type="text" id="username" value="Niko064255" placeholder="Enter username...">
             </div>
         </div>
     </header>
 
-    <!-- Packages Grid -->
     <div class="store-container">
         
         <!-- Tier 1 -->
@@ -282,7 +250,7 @@
             <div class="card-title">altarlesmp plugin</div>
             <div class="price">$19.00 <span>/ Lifetime</span></div>
             <ul class="features">
-                <li><i class="fa-solid fa-shield-halved"></i> Custom Armor</li>
+                <li>Custom Armor</li>
             </ul>
             <button class="btn" onclick="addToCart('altarlesmp plugin', 19.00)">Add To Cart</button>
         </div>
@@ -292,7 +260,7 @@
             <div class="card-title">altarlesmp plugin+</div>
             <div class="price">$30.00 <span>/ Lifetime</span></div>
             <ul class="features">
-                <li><i class="fa-solid fa-khanda"></i> Custom Weapons</li>
+                <li>Custom Weapons</li>
             </ul>
             <button class="btn" onclick="addToCart('altarlesmp plugin+', 30.00)">Add To Cart</button>
         </div>
@@ -303,23 +271,20 @@
             <div class="card-title">altarlesmp plugin++</div>
             <div class="price">$100.00 <span>/ Lifetime</span></div>
             <ul class="features">
-                <li><i class="fa-solid fa-shield-halved"></i> Custom Armor</li>
-                <li><i class="fa-solid fa-khanda"></i> Custom Weapons</li>
-                <li><i class="fa-solid fa-box-open"></i> Texture Pack</li>
+                <li>Custom Armor</li>
+                <li>Custom Weapons</li>
+                <li>Texture Pack</li>
             </ul>
             <button class="btn" onclick="addToCart('altarlesmp plugin++', 100.00)">Add To Cart</button>
         </div>
 
     </div>
 
-    <!-- Added to Cart Toast Notification -->
     <div id="toast" class="cart-toast">
-        <i class="fa-solid fa-circle-check" style="color: var(--electric-cyan); font-size: 1.3rem;"></i>
         <span id="toast-message">Added to cart!</span>
     </div>
 
     <script>
-        // Update Minecraft skin head dynamically on username input
         const usernameInput = document.getElementById('username');
         const playerAvatar = document.getElementById('player-avatar');
 
@@ -328,13 +293,12 @@
             playerAvatar.src = `https://mc-heads.net/avatar/${name}`;
         });
 
-        // Add package to cart simulation
         function addToCart(packageName, price) {
             const player = usernameInput.value.trim() || 'Steve';
             const toast = document.getElementById('toast');
             const toastMsg = document.getElementById('toast-message');
 
-            toastMsg.innerHTML = `Added <b>${packageName}</b> ($${price.toFixed(2)}) for player <b>${player}</b>!`;
+            toastMsg.innerHTML = `Added <b>${packageName}</b> ($${price}) for player <b>${player}</b>!`;
             toast.style.display = 'flex';
 
             setTimeout(() => {
