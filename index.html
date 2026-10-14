@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AltarleSMP Store</title>
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -34,7 +33,6 @@
             align-items: center;
         }
 
-        /* Top Header & User Selector */
         header {
             text-align: center;
             max-width: 800px;
@@ -103,7 +101,6 @@
             box-shadow: 0 0 10px rgba(0, 255, 170, 0.3);
         }
 
-        /* Products Grid */
         .store-container {
             display: flex;
             flex-wrap: wrap;
@@ -224,7 +221,6 @@
             transform: scale(1.02);
         }
 
-        /* Floating Cart Notification */
         .cart-toast {
             position: fixed;
             bottom: 20px;
@@ -236,94 +232,3 @@
             border-radius: 10px;
             box-shadow: 0 8px 25px rgba(0, 255, 170, 0.3);
             display: none;
-            align-items: center;
-            gap: 12px;
-            z-index: 1000;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>AltarleSMP Web Store</h1>
-        
-        <!-- Frame chọn tên tài khoản -->
-        <div class="user-input-box">
-            <img id="player-avatar" class="user-avatar" src="https://mc-heads.net/avatar/Niko064255" alt="Skin Head">
-            <div class="input-group">
-                <label for="username">Minecraft Player Name</label>
-                <input type="text" id="username" value="Niko064255" placeholder="Nhập tên người chơi...">
-            </div>
-        </div>
-    </header>
-
-    <!-- Danh sách gói Plugin -->
-    <div class="store-container">
-        
-        <!-- Gói 1 -->
-        <div class="card">
-            <div class="card-title">altarlesmp plugin</div>
-            <div class="price">$19.00 <span>/ Lifetime</span></div>
-            <ul class="features">
-                <li><i class="fa-solid fa-shield-halved"></i> Custom Armor</li>
-            </ul>
-            <button class="btn" onclick="addToCart('altarlesmp plugin', 19.00)">Add To Cart</button>
-        </div>
-
-        <!-- Gói 2 -->
-        <div class="card">
-            <div class="card-title">altarlesmp plugin+</div>
-            <div class="price">$30.00 <span>/ Lifetime</span></div>
-            <ul class="features">
-                <li><i class="fa-solid fa-sword"></i> Custom Weapons</li>
-            </ul>
-            <button class="btn" onclick="addToCart('altarlesmp plugin+', 30.00)">Add To Cart</button>
-        </div>
-
-        <!-- Gói 3 -->
-        <div class="card featured">
-            <div class="badge">BEST VALUE</div>
-            <div class="card-title">altarlesmp plugin++</div>
-            <div class="price">$100.00 <span>/ Lifetime</span></div>
-            <ul class="features">
-                <li><i class="fa-solid fa-shield-halved"></i> Custom Armor</li>
-                <li><i class="fa-solid fa-sword"></i> Custom Weapons</li>
-                <li><i class="fa-solid fa-box-open"></i> Exclusive Texture Pack</li>
-            </ul>
-            <button class="btn" onclick="addToCart('altarlesmp plugin++', 100.00)">Add To Cart</button>
-        </div>
-
-    </div>
-
-    <!-- Thông báo thêm giỏ hàng thành công -->
-    <div id="toast" class="cart-toast">
-        <i class="fa-solid fa-circle-check" style="color: var(--accent-green); font-size: 1.2rem;"></i>
-        <span id="toast-message">Đã thêm vào giỏ hàng!</span>
-    </div>
-
-    <script>
-        // Cập nhật Avatar Minecraft khi thay đổi Tên
-        const usernameInput = document.getElementById('username');
-        const playerAvatar = document.getElementById('player-avatar');
-
-        usernameInput.addEventListener('input', function () {
-            const name = this.value.trim() || 'Steve';
-            playerAvatar.src = `https://mc-heads.net/avatar/${name}`;
-        });
-
-        // Hàm xử lý thêm vào giỏ hàng
-        function addToCart(packageName, price) {
-            const player = usernameInput.value.trim() || 'Steve';
-            const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toast-message');
-
-            toastMsg.innerHTML = `Đã chọn <b>${packageName}</b> ($${price}) cho người chơi <b>${player}</b>!`;
-            toast.style.display = 'flex';
-
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 3000);
-        }
-    </script>
-</body>
-</html>
