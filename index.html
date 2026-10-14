@@ -1,266 +1,345 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALTARLESMP STORE</title>
+    <title>Altarle SMP Store - Plugin & Texture Pack</title>
     <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #151d30;
+            --card-border: #232f48;
+            --accent-blue: #38bdf8;
+            --accent-purple: #a855f7;
+            --accent-gold: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background-color: #040812;
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+
+        /* Header / Navbar */
+        header {
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
         }
 
-        /* Title */
-        .store-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            text-transform: uppercase;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .store-title .highlight {
-            color: #00f0ff;
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            transition: color 0.2s;
         }
 
-        /* Username Box */
-        .username-card {
-            background-color: #081322;
-            border: 1px solid #102a45;
-            border-radius: 12px;
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 45px;
-            width: 360px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        nav a:hover {
+            color: var(--accent-blue);
         }
 
-        .avatar-box {
-            width: 48px;
-            height: 48px;
-            background: #000;
-            border-radius: 6px;
-            border: 2px solid #00f0ff;
-            overflow: hidden;
-            flex-shrink: 0;
+        /* Hero Banner */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.1) 0%, transparent 60%);
         }
 
-        .avatar-box img {
-            width: 100%;
-            height: 100%;
-            image-rendering: pixelated;
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 800;
         }
 
-        .username-info {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            width: 100%;
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .username-label {
-            font-size: 0.7rem;
-            color: #627d9a;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .username-input {
-            background-color: #040914;
-            border: 1px solid #00f0ff;
-            color: #00f0ff;
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 8px 12px;
-            border-radius: 6px;
-            outline: none;
+        /* Store Container */
+        .store-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 20px 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
             width: 100%;
         }
 
-        /* Cards Grid */
-        .cards-container {
-            display: flex;
-            gap: 24px;
-            justify-content: center;
-            align-items: stretch;
-            max-width: 1100px;
-            width: 100%;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background-color: #081322;
-            border: 1px solid #102a45;
+        /* Card Component */
+        .product-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 16px;
-            padding: 35px 28px 28px 28px;
-            width: 320px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            transition: transform 0.2s ease;
+            transition: all 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-4px);
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.15);
         }
 
-        /* Featured Card Plugin++ */
-        .card.featured {
-            border: 2px solid #00f0ff;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.25);
+        .product-card.gold-tier {
+            border-color: var(--accent-gold);
+            background: linear-gradient(180deg, rgba(245, 158, 11, 0.05) 0%, var(--card-bg) 100%);
+        }
+
+        .product-card.gold-tier:hover {
+            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.2);
         }
 
         .badge {
             position: absolute;
-            top: -13px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #00f0ff;
-            color: #040812;
-            font-size: 0.7rem;
+            top: -12px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--accent-gold), #d97706);
+            color: #000;
             font-weight: 800;
-            padding: 4px 18px;
+            font-size: 0.75rem;
+            padding: 4px 12px;
             border-radius: 20px;
-            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
-        .card-name {
-            font-size: 1.35rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 16px;
-            color: #ffffff;
+        .card-header h3 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
         }
 
-        .card.featured .card-name {
-            color: #00f0ff;
-        }
-
-        .card-price {
+        .price-tag {
             font-size: 2.2rem;
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #ffffff;
+            font-weight: 800;
+            color: var(--accent-blue);
+            margin: 15px 0 20px;
         }
 
-        .card-price span {
-            font-size: 0.85rem;
-            color: #627d9a;
-            font-weight: 500;
+        .gold-tier .price-tag {
+            color: var(--accent-gold);
         }
 
-        /* Weapon Preview Container inside Cards */
-        .item-previews {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.25);
-            border-radius: 8px;
-            border: 1px dashed rgba(0, 240, 255, 0.2);
-        }
-
-        .item-preview-img {
-            width: 55px;
-            height: 55px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4));
-        }
-
-        .item-preview-img.red-sword {
-            filter: drop-shadow(0 0 8px rgba(255, 50, 80, 0.5));
-        }
-
-        /* Features List */
         .features-list {
             list-style: none;
             margin-bottom: 30px;
-            flex-grow: 1;
         }
 
-        .feature-item {
+        .features-list li {
+            margin-bottom: 12px;
+            color: var(--text-muted);
             display: flex;
             align-items: center;
-            gap: 10px;
             font-size: 0.95rem;
-            color: #c2d5e8;
-            margin-bottom: 14px;
         }
 
-        .feature-item .check {
-            color: #00f0ff;
-            font-weight: 900;
+        .features-list li span {
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 10px;
         }
 
-        /* Add to Cart Buttons */
-        .btn-add {
+        .btn {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border: none;
             border-radius: 8px;
-            background-color: #0075ff;
-            color: #ffffff;
-            font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            transition: all 0.2s;
+            text-align: center;
         }
 
-        .btn-add:hover {
-            background-color: #0060d6;
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: #0b0f19;
         }
 
-        .card.featured .btn-add {
-            background-color: #00f0ff;
-            color: #040812;
-            font-weight: 800;
+        .btn-primary:hover {
+            background-color: #0284c7;
+            color: #ffffff;
         }
 
-        .card.featured .btn-add:hover {
-            background-color: #00d6e6;
+        .btn-gold {
+            background-color: var(--accent-gold);
+            color: #000;
+        }
+
+        .btn-gold:hover {
+            background-color: #b45309;
+            color: #fff;
+        }
+
+        /* Modal Purchase */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg-color);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Title -->
-    <h1 class="store-title">ALTARLESMP <span class="highlight">STORE</span></h1>
+    <header>
+        <div class="logo">ALTARLE SMP</div>
+        <nav>
+            <a href="#store">Sản Phẩm</a>
+            <a href="#support">Hỗ Trợ Discord</a>
+        </nav>
+    </header>
 
-    <!-- Username Card -->
-    <div class="username-card">
-        <div class="avatar-box">
-            <img id="avatar-img" src="https://mc-heads.net/avatar/Niko064255" alt="Skin">
+    <section class="hero">
+        <h1>Nâng Cấp Server Minecraft Của Bạn</h1>
+        <p>Bảo mật chống đúp portal tối tân kết hợp tài nguyên Texture Pack độc quyền dành riêng cho dòng máy chủ SMP.</p>
+    </section>
+
+    <main class="store-container" id="store">
+        <!-- Gói Altarle SMP+ -->
+        <div class="product-card">
+            <div class="card-header">
+                <h3>Altarle SMP+</h3>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">Bảo Mật & Cơ Bản</p>
+            </div>
+            <div class="price-tag">150.000đ</div>
+            <ul class="features-list">
+                <li><span>✓</span> Plugin Anti-Dupe Portal (Nether & End)</li>
+                <li><span>✓</span> Texture Pack Giao Diện Cơ Bản</li>
+                <li><span>✓</span> Chống Lag & Tối Ưu Chunk Event</li>
+                <li><span>✓</span> Cấu Hình Config Tùy Chỉnh</li>
+            </ul>
+            <button class="btn btn-primary" onclick="openCheckout('Altarle SMP+', '150.000đ')">Mua Ngay</button>
         </div>
-        <div class="username-info">
-            <span class="username-label">MINECRAFT USERNAME</span>
-            <input type="text" id="username-input" class="username-input" value="Niko064255">
+
+        <!-- Gói Altarle SMP++ -->
+        <div class="product-card">
+            <div class="card-header">
+                <h3>Altarle SMP++</h3>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">Plugin & Custom Texture Pack</p>
+            </div>
+            <div class="price-tag">300.000đ</div>
+            <ul class="features-list">
+                <li><span>✓</span> Toàn bộ tính năng gói SMP+</li>
+                <li><span>✓</span> Custom Texture Pack (Vũ Khí, Giáp)</li>
+                <li><span>✓</span> Giao diện Custom GUI Menu</li>
+                <li><span>✓</span> Bộ Plugin Bổ Sung Gameplay SMP</li>
+            </ul>
+            <button class="btn btn-primary" onclick="openCheckout('Altarle SMP++', '300.000đ')">Mua Ngay</button>
         </div>
-    </div>
 
-    <!-- Store Packages Grid -->
-    <div class="cards-container">
+        <!-- Gói Altarle SMP+++ -->
+        <div class="product-card gold-tier">
+            <div class="badge">KHUYÊN DÙNG</div>
+            <div class="card-header">
+                <h3>Altarle SMP+++</h3>
+                <p style="color: var(--accent-gold); font-size: 0.85rem;">Full Plugin & Full Texture Pack</p>
+            </div>
+            <div class="price-tag">500.000đ</div>
+            <ul class="features-list">
+                <li><span>✓</span> <b>FULL Plugin Suite</b> (Kinh tế, Chợ đen, Anti-bot)</li>
+                <li><span>✓</span> <b>FULL Texture Pack</b> (Models 3D & Chiêu thức)</li>
+                <li><span>✓</span> Tích hợp Plug & Play (Dùng ngay)</li>
+                <li><span>✓</span> Hỗ trợ Cài đặt 1:1 + Cập nhật trọn đời</li>
+            </ul>
+            <button class="btn btn-gold" onclick="openCheckout('Altarle SMP+++', '500.000đ')">Mua Ngay</button>
+        </div>
+    </main>
 
-        <!-- Package 1 -->
-        <div class="card">
-            <h2 class="card-name
+    <!-- Modal Thanh Toán -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCheckout()">&times;</span>
+            <h3 id="modalPackageTitle" style="margin-bottom: 5px;">Thanh Toán</h3>
+            <p id="modalPackagePrice" style="color: var(--accent-blue); font-weight: bold; margin-bottom: 20px;"></p>
+            
+            <form onsubmit="handlePayment(event)">
