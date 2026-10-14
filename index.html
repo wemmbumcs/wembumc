@@ -1,50 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AltarleSMP Store</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-color: #090d16;
+            --card-bg: #101826;
+            --accent-cyan: #00d2ff;
+            --accent-green: #00ffaa;
+            --text-main: #ffffff;
+            --text-muted: #8a99ad;
+            --border-color: rgba(0, 210, 255, 0.2);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
         }
 
         body {
-            background-color: #0a1118;
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 40px 20px;
+        }
+
+        /* Top Header & User Selector */
+        header {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            margin-bottom: 40px;
         }
 
         h1 {
-            margin-bottom: 40px;
-            color: #00ffaa;
-            text-align: center;
+            font-size: 2.5rem;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+            margin-bottom: 25px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(0, 255, 170, 0.4);
         }
 
-        .container {
+        .user-input-box {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: #000;
+            border: 2px solid var(--accent-cyan);
+            image-rendering: pixelated;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            background: #090d16;
+            border: 1px solid var(--border-color);
+            color: var(--accent-green);
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 10px rgba(0, 255, 170, 0.3);
+        }
+
+        /* Products Grid */
+        .store-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 25px;
+            gap: 30px;
             justify-content: center;
             max-width: 1100px;
             width: 100%;
         }
 
         .card {
-            background: #121e2b;
-            border: 2px solid #00a8ff;
-            border-radius: 14px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
             padding: 30px 25px;
             width: 320px;
             display: flex;
@@ -52,58 +124,60 @@
             align-items: center;
             transition: all 0.3s ease;
             position: relative;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.3);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 12px 35px rgba(0, 210, 255, 0.25);
         }
 
         .card.featured {
-            border-color: #00ffaa;
-            box-shadow: 0 0 20px rgba(0, 255, 170, 0.25);
+            border-color: var(--accent-green);
+            box-shadow: 0 0 25px rgba(0, 255, 170, 0.2);
         }
 
         .card.featured:hover {
-            box-shadow: 0 8px 30px rgba(0, 255, 170, 0.4);
+            box-shadow: 0 12px 40px rgba(0, 255, 170, 0.35);
         }
 
         .badge {
             position: absolute;
             top: -14px;
-            background: #00ffaa;
-            color: #0a1118;
-            padding: 4px 14px;
-            font-size: 12px;
-            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            color: #090d16;
+            padding: 4px 16px;
+            font-size: 0.75rem;
+            font-weight: 800;
             border-radius: 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .title {
-            font-size: 22px;
-            font-weight: bold;
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
             margin-bottom: 15px;
-            color: #00d2ff;
+            color: var(--accent-cyan);
             text-align: center;
         }
 
-        .card.featured .title {
-            color: #00ffaa;
+        .card.featured .card-title {
+            color: var(--accent-green);
         }
 
         .price {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 25px;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
             color: #ffffff;
         }
 
         .price span {
-            font-size: 14px;
-            color: #7f8c8d;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: normal;
         }
 
         .features {
@@ -115,19 +189,16 @@
 
         .features li {
             padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            color: #dcdde1;
-            font-size: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #d1d8e0;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
+            gap: 10px;
         }
 
-        .features li::before {
-            content: "✓";
-            color: #00ffaa;
-            margin-right: 12px;
-            font-weight: bold;
-            font-size: 16px;
+        .features li i {
+            color: var(--accent-green);
         }
 
         .btn {
@@ -135,62 +206,124 @@
             padding: 12px;
             border: none;
             border-radius: 8px;
-            background: linear-gradient(135deg, #00a8ff, #0097e6);
+            background: linear-gradient(135deg, #00d2ff, #0088ff);
             color: #ffffff;
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: opacity 0.2s, transform 0.1s;
         }
 
         .card.featured .btn {
-            background: linear-gradient(135deg, #00ffaa, #00a8ff);
-            color: #0a1118;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            color: #090d16;
         }
 
         .btn:hover {
             opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        /* Floating Cart Notification */
+        .cart-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 2px solid var(--accent-green);
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 255, 170, 0.3);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
         }
     </style>
 </head>
 <body>
 
-    <h1>AltarleSMP Web Store</h1>
+    <header>
+        <h1>AltarleSMP Web Store</h1>
+        
+        <!-- Frame chọn tên tài khoản -->
+        <div class="user-input-box">
+            <img id="player-avatar" class="user-avatar" src="https://mc-heads.net/avatar/Niko064255" alt="Skin Head">
+            <div class="input-group">
+                <label for="username">Minecraft Player Name</label>
+                <input type="text" id="username" value="Niko064255" placeholder="Nhập tên người chơi...">
+            </div>
+        </div>
+    </header>
 
-    <div class="container">
-        <!-- Tier 1 -->
+    <!-- Danh sách gói Plugin -->
+    <div class="store-container">
+        
+        <!-- Gói 1 -->
         <div class="card">
-            <div class="title">altarlesmp plugin</div>
+            <div class="card-title">altarlesmp plugin</div>
             <div class="price">$19.00 <span>/ Lifetime</span></div>
             <ul class="features">
-                <li>Custom Armor</li>
+                <li><i class="fa-solid fa-shield-halved"></i> Custom Armor</li>
             </ul>
-            <button class="btn">Add To Cart</button>
+            <button class="btn" onclick="addToCart('altarlesmp plugin', 19.00)">Add To Cart</button>
         </div>
 
-        <!-- Tier 2 -->
+        <!-- Gói 2 -->
         <div class="card">
-            <div class="title">altarlesmp plugin+</div>
+            <div class="card-title">altarlesmp plugin+</div>
             <div class="price">$30.00 <span>/ Lifetime</span></div>
             <ul class="features">
-                <li>Custom Weapons</li>
+                <li><i class="fa-solid fa-sword"></i> Custom Weapons</li>
             </ul>
-            <button class="btn">Add To Cart</button>
+            <button class="btn" onclick="addToCart('altarlesmp plugin+', 30.00)">Add To Cart</button>
         </div>
 
-        <!-- Tier 3 -->
+        <!-- Gói 3 -->
         <div class="card featured">
             <div class="badge">BEST VALUE</div>
-            <div class="title">altarlesmp plugin++</div>
+            <div class="card-title">altarlesmp plugin++</div>
             <div class="price">$100.00 <span>/ Lifetime</span></div>
             <ul class="features">
-                <li>Custom Armor</li>
-                <li>Custom Weapons</li>
-                <li>Texture Pack</li>
+                <li><i class="fa-solid fa-shield-halved"></i> Custom Armor</li>
+                <li><i class="fa-solid fa-sword"></i> Custom Weapons</li>
+                <li><i class="fa-solid fa-box-open"></i> Exclusive Texture Pack</li>
             </ul>
-            <button class="btn">Add To Cart</button>
+            <button class="btn" onclick="addToCart('altarlesmp plugin++', 100.00)">Add To Cart</button>
         </div>
+
     </div>
 
+    <!-- Thông báo thêm giỏ hàng thành công -->
+    <div id="toast" class="cart-toast">
+        <i class="fa-solid fa-circle-check" style="color: var(--accent-green); font-size: 1.2rem;"></i>
+        <span id="toast-message">Đã thêm vào giỏ hàng!</span>
+    </div>
+
+    <script>
+        // Cập nhật Avatar Minecraft khi thay đổi Tên
+        const usernameInput = document.getElementById('username');
+        const playerAvatar = document.getElementById('player-avatar');
+
+        usernameInput.addEventListener('input', function () {
+            const name = this.value.trim() || 'Steve';
+            playerAvatar.src = `https://mc-heads.net/avatar/${name}`;
+        });
+
+        // Hàm xử lý thêm vào giỏ hàng
+        function addToCart(packageName, price) {
+            const player = usernameInput.value.trim() || 'Steve';
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+
+            toastMsg.innerHTML = `Đã chọn <b>${packageName}</b> ($${price}) cho người chơi <b>${player}</b>!`;
+            toast.style.display = 'flex';
+
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
