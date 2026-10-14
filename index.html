@@ -1,671 +1,293 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AltarleSMP Store - Official Webstore</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    
+    <title>AltarleSMP Store</title>
     <style>
         :root {
-            --bg-dark: #070f09;
-            --bg-card: #0d1f14;
-            --bg-card-hover: #132b1c;
-            --neon-green: #00ff66;
-            --lime-bright: #00e676;
-            --emerald-glow: rgba(0, 255, 102, 0.15);
-            --border-neon: rgba(0, 255, 102, 0.25);
+            --bg-dark: #030a16;
+            --card-bg: #0a172c;
+            --ocean-blue: #0077ff;
+            --electric-cyan: #00f0ff;
+            --text-primary: #ffffff;
+            --text-secondary: #82a0c8;
+            --border-blue: rgba(0, 170, 255, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
         body {
             background-color: var(--bg-dark);
-            color: #e2e8f0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 255, 102, 0.12) 0%, transparent 60%),
-                radial-gradient(circle at 10% 80%, rgba(0, 230, 118, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(0, 255, 102, 0.05) 0%, transparent 40%);
-            background-attachment: fixed;
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        h1, h2, h3, .font-heading {
-            font-family: 'Space Grotesk', sans-serif;
+        header {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            margin-bottom: 40px;
         }
 
-        /* Neon Glow Utility Classes */
-        .neon-border {
-            border: 1px solid var(--border-neon);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .neon-border:hover {
-            border-color: var(--neon-green);
-            box-shadow: 0 0 25px rgba(0, 255, 102, 0.3);
-        }
-
-        .neon-glow-btn {
-            background: linear-gradient(135deg, #00ff66 0%, #00b348 100%);
-            color: #041008;
-            font-weight: 800;
+        h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 25px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
-            transition: all 0.25s ease;
+            letter-spacing: 2px;
         }
 
-        .neon-glow-btn:hover {
-            box-shadow: 0 0 25px rgba(0, 255, 102, 0.7);
-            transform: translateY(-2px);
-            background: linear-gradient(135deg, #39ff7e 0%, #00e676 100%);
+        h1 span {
+            color: var(--electric-cyan);
         }
 
-        .neon-card-featured {
-            border: 2px solid var(--neon-green);
-            box-shadow: 0 0 30px rgba(0, 255, 102, 0.25);
-            animation: pulse-border 3s infinite alternate;
+        .user-input-box {
+            background: var(--card-bg);
+            border: 2px solid var(--border-blue);
+            border-radius: 14px;
+            padding: 20px 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        @keyframes pulse-border {
-            0% { box-shadow: 0 0 20px rgba(0, 255, 102, 0.2); }
-            100% { box-shadow: 0 0 35px rgba(0, 255, 102, 0.45); }
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background: #000;
+            border: 2px solid var(--electric-cyan);
+            image-rendering: pixelated;
         }
 
-        .text-neon {
-            color: var(--neon-green);
-            text-shadow: 0 0 12px rgba(0, 255, 102, 0.5);
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
         }
 
-        /* Grid Background Pattern */
-        .bg-grid-pattern {
-            background-size: 30px 30px;
-            background-image: 
-                linear-gradient(to right, rgba(0, 255, 102, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 255, 102, 0.03) 1px, transparent 1px);
+        .input-group label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-weight: bold;
         }
 
-        /* Drawer Overlay & Slide */
-        .cart-drawer {
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        .input-group input {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-blue);
+            color: var(--electric-cyan);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            outline: none;
+            width: 220px;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .store-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1150px;
+            width: 100%;
         }
-        ::-webkit-scrollbar-track {
-            background: #050b07;
+
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-blue);
+            border-radius: 18px;
+            padding: 35px 28px;
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
         }
-        ::-webkit-scrollbar-thumb {
-            background: #0f331d;
-            border-radius: 4px;
+
+        .card.featured {
+            border-color: var(--electric-cyan);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.25);
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--neon-green);
+
+        .badge {
+            position: absolute;
+            top: -14px;
+            background: var(--electric-cyan);
+            color: #030a16;
+            padding: 5px 18px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-size: 1.45rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .card.featured .card-title {
+            color: var(--electric-cyan);
+        }
+
+        .price {
+            font-size: 2.3rem;
+            font-weight: 800;
+            margin-bottom: 22px;
+            color: #ffffff;
+        }
+
+        .price span {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: normal;
+        }
+
+        .features {
+            list-style: none;
+            width: 100%;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            color: #c0d4ed;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features li::before {
+            content: "✓";
+            color: var(--electric-cyan);
+            font-weight: bold;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: var(--ocean-blue);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .card.featured .btn {
+            background: var(--electric-cyan);
+            color: #030a16;
+        }
+
+        .cart-toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--card-bg);
+            border: 2px solid var(--electric-cyan);
+            color: #fff;
+            padding: 16px 28px;
+            border-radius: 12px;
+            display: none;
+            align-items: center;
+            gap: 14px;
+            z-index: 1000;
         }
     </style>
 </head>
-<body class="min-h-screen bg-grid-pattern flex flex-col justify-between selection:bg-emerald-500 selection:text-black">
+<body>
 
-    <!-- TOP NAVIGATION -->
-    <nav class="sticky top-0 z-40 backdrop-blur-md bg-[#070f09]/80 border-b border-[#00ff66]/20 py-4 px-4 sm:px-8">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <!-- Brand Logo -->
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                <div class="w-10 h-10 rounded-xl bg-emerald-950 border border-[#00ff66] flex items-center justify-center text-[#00ff66] shadow-[0_0_15px_rgba(0,255,102,0.3)]">
-                    <i class="fa-solid fa-cube text-xl"></i>
-                </div>
-                <div>
-                    <span class="text-xl font-extrabold tracking-wider font-heading text-white">ALTARLE<span class="text-neon">SMP</span></span>
-                    <span class="block text-[10px] tracking-widest uppercase text-emerald-400/70 font-semibold">Official Webstore</span>
-                </div>
-            </div>
-
-            <!-- Server IP Copy & Cart Trigger -->
-            <div class="flex items-center space-x-3">
-                <button onclick="copyServerIP()" class="hidden sm:flex items-center space-x-2 bg-emerald-950/60 hover:bg-emerald-900/60 border border-[#00ff66]/30 px-3.5 py-2 rounded-lg text-xs font-semibold text-emerald-300 transition-all">
-                    <span class="w-2 h-2 rounded-full bg-[#00ff66] animate-pulse"></span>
-                    <span id="ip-text">play.altarlesmp.net</span>
-                    <i class="fa-regular fa-copy ml-1"></i>
-                </button>
-
-                <!-- Cart Button -->
-                <button onclick="toggleCartDrawer(true)" class="relative bg-[#0d1f14] hover:bg-[#132b1c] border border-[#00ff66]/40 text-white px-4 py-2 rounded-xl flex items-center space-x-2.5 transition-all shadow-[0_0_15px_rgba(0,255,102,0.15)] hover:shadow-[0_0_20px_rgba(0,255,102,0.3)]">
-                    <i class="fa-solid fa-cart-shopping text-neon"></i>
-                    <span class="font-bold text-sm hidden sm:inline">Giỏ Hàng</span>
-                    <span id="cart-badge" class="bg-[#00ff66] text-black text-xs font-black px-2 py-0.5 rounded-full min-w-[20px] text-center">0</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10 flex-grow w-full">
+    <header>
+        <h1>AltarleSMP <span>Store</span></h1>
         
-        <!-- HERO / USERNAME INPUT SECTION -->
-        <section class="mb-14 text-center">
-            <div class="inline-block px-4 py-1.5 rounded-full bg-emerald-950/80 border border-[#00ff66]/30 text-neon text-xs font-bold uppercase tracking-widest mb-4">
-                <i class="fa-solid fa-bolt mr-1"></i> Giao nhận vật phẩm tự động 24/7
-            </div>
-            
-            <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight mb-4">
-                NÂNG CẤP TRẢI NGHIỆM <span class="text-neon underline decoration-[#00ff66]/40 underline-offset-8">ALTARLESMP</span>
-            </h1>
-            <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base mb-8">
-                Nhập tên nhân vật Minecraft của bạn bên dưới để nhận chính xác các gói Plugin, Armor và Weapons độc quyền.
-            </p>
-
-            <!-- Username Input Box with Dynamic Avatar -->
-            <div class="max-w-md mx-auto bg-[#0d1f14] border-2 border-[#00ff66]/40 rounded-2xl p-4 shadow-[0_0_30px_rgba(0,255,102,0.15)] flex items-center space-x-4">
-                <div class="relative group">
-                    <img id="player-avatar-head" 
-                         src="https://mc-heads.net/avatar/Niko064255" 
-                         alt="Player Skin" 
-                         class="w-14 h-14 rounded-xl border-2 border-[#00ff66] bg-black/50 p-0.5 image-pixelated shadow-[0_0_10px_rgba(0,255,102,0.3)] group-hover:scale-105 transition-transform">
-                    <div class="absolute -bottom-1 -right-1 bg-emerald-500 text-black text-[9px] font-extrabold px-1 rounded">MC</div>
-                </div>
-
-                <div class="flex-grow text-left">
-                    <label for="username-input" class="block text-[11px] font-bold text-emerald-400 uppercase tracking-wider mb-1">
-                        Minecraft Username <span class="text-red-400">*</span>
-                    </label>
-                    <input type="text" 
-                           id="username-input" 
-                           value="Niko064255" 
-                           placeholder="Nhập tên in-game..." 
-                           class="w-full bg-[#070f09] border border-[#00ff66]/30 focus:border-[#00ff66] rounded-lg px-3 py-2 text-white font-bold text-sm focus:outline-none focus:ring-1 focus:ring-[#00ff66] transition-all">
-                </div>
-            </div>
-        </section>
-
-        <!-- PRODUCTS STORE GRID -->
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mb-16">
-            
-            <!-- PACKAGE 1: altarlesmp plugin -->
-            <div class="bg-[#0d1f14] neon-border rounded-2xl p-6 flex flex-col justify-between relative group">
-                <div>
-                    <!-- Package Header -->
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-[#00ff66]/30 flex items-center justify-center text-[#00ff66] text-2xl">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
-                        <span class="text-xs font-bold bg-emerald-950 text-emerald-400 px-3 py-1 rounded-full border border-emerald-800/50">ENTRY</span>
-                    </div>
-
-                    <h3 class="text-2xl font-bold text-white mb-2">altarlesmp plugin</h3>
-                    <p class="text-slate-400 text-xs mb-6">Gói cơ bản trang bị giáp ảo thuật độc quyền cho người chơi mới.</p>
-
-                    <!-- Price -->
-                    <div class="flex items-baseline space-x-1 mb-6 pb-6 border-b border-emerald-900/40">
-                        <span class="text-4xl font-extrabold text-white font-heading">$19.00</span>
-                        <span class="text-xs text-slate-400 font-semibold">USD / Lifetime</span>
-                    </div>
-
-                    <!-- Features List -->
-                    <ul class="space-y-3 mb-8 text-sm">
-                        <li class="flex items-center text-slate-200">
-                            <i class="fa-solid fa-circle-check text-neon mr-3"></i>
-                            <span><b>Custom Armor</b> Set</span>
-                        </li>
-                        <li class="flex items-center text-slate-500">
-                            <i class="fa-solid fa-circle-xmark mr-3"></i>
-                            <span class="line-through">Custom Weapons</span>
-                        </li>
-                        <li class="flex items-center text-slate-500">
-                            <i class="fa-solid fa-circle-xmark mr-3"></i>
-                            <span class="line-through">Exclusive Texture Pack</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Action Button -->
-                <button onclick="addToCart('altarlesmp plugin', 19.00, 'Custom Armor')" class="w-full neon-glow-btn py-3 px-4 rounded-xl text-sm font-bold flex items-center justify-center space-x-2">
-                    <i class="fa-solid fa-cart-plus"></i>
-                    <span>Thêm Vào Giỏ</span>
-                </button>
-            </div>
-
-            <!-- PACKAGE 2: altarlesmp plugin+ -->
-            <div class="bg-[#0d1f14] neon-border rounded-2xl p-6 flex flex-col justify-between relative group">
-                <div>
-                    <!-- Package Header -->
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-[#00ff66]/30 flex items-center justify-center text-[#00ff66] text-2xl">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        </div>
-                        <span class="text-xs font-bold bg-emerald-950 text-emerald-300 px-3 py-1 rounded-full border border-emerald-800/50">PRO</span>
-                    </div>
-
-                    <h3 class="text-2xl font-bold text-white mb-2">altarlesmp plugin+</h3>
-                    <p class="text-slate-400 text-xs mb-6">Mở khóa bộ vũ khí sức mạnh chiến đấu đặc xịn cho Server.</p>
-
-                    <!-- Price -->
-                    <div class="flex items-baseline space-x-1 mb-6 pb-6 border-b border-emerald-900/40">
-                        <span class="text-4xl font-extrabold text-white font-heading">$30.00</span>
-                        <span class="text-xs text-slate-400 font-semibold">USD / Lifetime</span>
-                    </div>
-
-                    <!-- Features List -->
-                    <ul class="space-y-3 mb-8 text-sm">
-                        <li class="flex items-center text-slate-500">
-                            <i class="fa-solid fa-circle-xmark mr-3"></i>
-                            <span class="line-through">Custom Armor</span>
-                        </li>
-                        <li class="flex items-center text-slate-200">
-                            <i class="fa-solid fa-circle-check text-neon mr-3"></i>
-                            <span><b>Custom Weapons</b> Pack</span>
-                        </li>
-                        <li class="flex items-center text-slate-500">
-                            <i class="fa-solid fa-circle-xmark mr-3"></i>
-                            <span class="line-through">Exclusive Texture Pack</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Action Button -->
-                <button onclick="addToCart('altarlesmp plugin+', 30.00, 'Custom Weapons')" class="w-full neon-glow-btn py-3 px-4 rounded-xl text-sm font-bold flex items-center justify-center space-x-2">
-                    <i class="fa-solid fa-cart-plus"></i>
-                    <span>Thêm Vào Giỏ</span>
-                </button>
-            </div>
-
-            <!-- PACKAGE 3: altarlesmp plugin++ (FEATURED) -->
-            <div class="bg-[#0f281a] neon-card-featured rounded-2xl p-6 flex flex-col justify-between relative scale-105 my-2 md:my-0">
-                <!-- Badge -->
-                <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#00ff66] text-black text-xs font-black px-4 py-1 rounded-full uppercase tracking-wider shadow-[0_0_15px_rgba(0,255,102,0.6)]">
-                    ★ BEST VALUE & POPULAR ★
-                </div>
-
-                <div>
-                    <!-- Package Header -->
-                    <div class="flex justify-between items-start mb-4 mt-2">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-900 border border-[#00ff66] flex items-center justify-center text-[#00ff66] text-2xl shadow-[0_0_15px_rgba(0,255,102,0.4)]">
-                            <i class="fa-solid fa-crown"></i>
-                        </div>
-                        <span class="text-xs font-bold bg-[#00ff66] text-black px-3 py-1 rounded-full font-black">ULTIMATE</span>
-                    </div>
-
-                    <h3 class="text-2xl font-black text-white mb-2">altarlesmp plugin++</h3>
-                    <p class="text-emerald-300/80 text-xs mb-6">Trọn bộ đặc quyền cao cấp nhất bao gồm Giáp, Vũ khí & Resource Pack.</p>
-
-                    <!-- Price -->
-                    <div class="flex items-baseline space-x-1 mb-6 pb-6 border-b border-emerald-800/60">
-                        <span class="text-5xl font-black text-neon font-heading">$100.00</span>
-                        <span class="text-xs text-emerald-200/70 font-semibold">USD / Lifetime</span>
-                    </div>
-
-                    <!-- Features List -->
-                    <ul class="space-y-3 mb-8 text-sm">
-                        <li class="flex items-center text-white font-semibold">
-                            <i class="fa-solid fa-circle-check text-neon mr-3 text-lg"></i>
-                            <span><b>Custom Armor</b> Full Set</span>
-                        </li>
-                        <li class="flex items-center text-white font-semibold">
-                            <i class="fa-solid fa-circle-check text-neon mr-3 text-lg"></i>
-                            <span><b>Custom Weapons</b> Arsenal</span>
-                        </li>
-                        <li class="flex items-center text-white font-semibold">
-                            <i class="fa-solid fa-circle-check text-neon mr-3 text-lg"></i>
-                            <span><b>Exclusive Texture Pack</b> Link</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Action Button -->
-                <button onclick="addToCart('altarlesmp plugin++', 100.00, 'Custom Armor, Custom Weapons, Texture Pack')" class="w-full neon-glow-btn py-3.5 px-4 rounded-xl text-sm font-black flex items-center justify-center space-x-2">
-                    <i class="fa-solid fa-cart-plus text-base"></i>
-                    <span>MUA NGAY GÓI VIP</span>
-                </button>
-            </div>
-
-        </section>
-
-        <!-- SERVER GUARANTEE / BANNER -->
-        <section class="bg-[#0d1f14] border border-[#00ff66]/20 rounded-2xl p-6 sm:p-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="flex items-center space-x-4">
-                <div class="w-14 h-14 rounded-2xl bg-emerald-950 border border-[#00ff66]/40 flex items-center justify-center text-neon text-2xl shrink-0">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold text-white">Thanh Toán An Toàn & Bảo Mật 100%</h4>
-                    <p class="text-xs text-slate-400">Hệ thống xử lý lệnh tự động kích hoạt vật phẩm ngay lập tức sau khi hoàn tất giao dịch.</p>
-                </div>
-            </div>
-            <div class="flex items-center space-x-6 text-2xl text-emerald-400/60">
-                <i class="fa-brands fa-cc-visa hover:text-neon transition-colors"></i>
-                <i class="fa-brands fa-cc-mastercard hover:text-neon transition-colors"></i>
-                <i class="fa-brands fa-paypal hover:text-neon transition-colors"></i>
-                <i class="fa-solid fa-qrcode hover:text-neon transition-colors"></i>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- OVERLAY BACKDROP -->
-    <div id="drawer-backdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-
-    <!-- CART DRAWER PANEL -->
-    <aside id="cart-drawer" class="cart-drawer fixed top-0 right-0 h-full w-full max-w-md bg-[#070f09] border-l border-[#00ff66]/30 z-50 translate-x-full flex flex-col justify-between p-6 shadow-[0_0_50px_rgba(0,0,0,0.9)]">
-        <!-- Drawer Header -->
-        <div>
-            <div class="flex items-center justify-between pb-4 border-b border-emerald-900/50 mb-6">
-                <div class="flex items-center space-x-3">
-                    <i class="fa-solid fa-basket-shopping text-neon text-xl"></i>
-                    <h3 class="text-xl font-bold text-white">Giỏ Hàng Của Bạn</h3>
-                </div>
-                <button onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-lg bg-emerald-950 hover:bg-emerald-900 text-slate-400 hover:text-white flex items-center justify-center transition-all">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <!-- Target Player Banner in Cart -->
-            <div class="bg-[#0d1f14] border border-[#00ff66]/30 rounded-xl p-3 mb-6 flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <img id="cart-player-avatar" src="https://mc-heads.net/avatar/Niko064255" class="w-10 h-10 rounded-lg bg-black border border-[#00ff66]/50">
-                    <div>
-                        <span class="block text-[10px] text-emerald-400 font-bold uppercase">Nhận Vật Phẩm Bởi</span>
-                        <span id="cart-player-name" class="text-sm font-extrabold text-white">Niko064255</span>
-                    </div>
-                </div>
-                <button onclick="focusUsernameInput()" class="text-xs text-neon hover:underline font-bold">Đổi Tên</button>
-            </div>
-
-            <!-- Items List -->
-            <div id="cart-items-container" class="space-y-4 max-h-[40vh] overflow-y-auto pr-1">
-                <!-- Cart items will be rendered here by JavaScript -->
+        <div class="user-input-box">
+            <img id="player-avatar" class="user-avatar" src="https://mc-heads.net/avatar/Niko064255" alt="Skin Head">
+            <div class="input-group">
+                <label for="username">Minecraft Username</label>
+                <input type="text" id="username" value="Niko064255" placeholder="Enter username...">
             </div>
         </div>
+    </header>
 
-        <!-- Drawer Footer & Checkout -->
-        <div class="pt-6 border-t border-emerald-900/50">
-            <div class="space-y-2 mb-6">
-                <div class="flex justify-between text-sm text-slate-400">
-                    <span>Tạm tính</span>
-                    <span id="subtotal-price" class="text-white font-semibold">$0.00</span>
-                </div>
-                <div class="flex justify-between text-sm text-slate-400">
-                    <span>Thuế & Phí xử lý</span>
-                    <span class="text-emerald-400 font-semibold">Miễn phí</span>
-                </div>
-                <div class="flex justify-between text-lg font-bold text-white pt-2 border-t border-emerald-950">
-                    <span>Tổng cộng</span>
-                    <span id="total-price" class="text-neon font-black font-heading">$0.00 USD</span>
-                </div>
-            </div>
-
-            <button id="checkout-btn" onclick="openCheckoutModal()" class="w-full neon-glow-btn py-4 rounded-xl font-black text-sm tracking-wide flex items-center justify-center space-x-2">
-                <span>TIẾN HÀNH THANH TOÁN</span>
-                <i class="fa-solid fa-arrow-right"></i>
-            </button>
+    <div class="store-container">
+        <div class="card">
+            <div class="card-title">altarlesmp plugin</div>
+            <div class="price">$19.00 <span>/ Lifetime</span></div>
+            <ul class="features">
+                <li>Custom Armor</li>
+            </ul>
+            <button class="btn" onclick="addToCart('altarlesmp plugin', 19.00)">Add To Cart</button>
         </div>
-    </aside>
 
-    <!-- CHECKOUT SIMULATOR MODAL -->
-    <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
-        <div class="bg-[#0d1f14] border-2 border-[#00ff66] rounded-2xl max-w-md w-full p-6 shadow-[0_0_40px_rgba(0,255,102,0.3)] relative">
-            
-            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
+        <div class="card">
+            <div class="card-title">altarlesmp plugin+</div>
+            <div class="price">$30.00 <span>/ Lifetime</span></div>
+            <ul class="features">
+                <li>Custom Weapons</li>
+            </ul>
+            <button class="btn" onclick="addToCart('altarlesmp plugin+', 30.00)">Add To Cart</button>
+        </div>
 
-            <div class="text-center mb-6">
-                <div class="w-16 h-16 rounded-2xl bg-emerald-950 border-2 border-[#00ff66] mx-auto flex items-center justify-center text-neon text-3xl mb-3 shadow-[0_0_20px_rgba(0,255,102,0.4)]">
-                    <i class="fa-solid fa-credit-card"></i>
-                </div>
-                <h3 class="text-2xl font-black text-white">Xác Nhận Đơn Hàng</h3>
-                <p class="text-xs text-slate-400 mt-1">Chọn phương thức thanh toán để nhận gói</p>
-            </div>
-
-            <!-- Summary Box -->
-            <div class="bg-[#070f09] border border-emerald-900 rounded-xl p-4 mb-6">
-                <div class="flex justify-between text-xs text-slate-400 mb-2">
-                    <span>Tài khoản Minecraft:</span>
-                    <span id="modal-player" class="text-neon font-bold">Niko064255</span>
-                </div>
-                <div class="flex justify-between text-xs text-slate-400 mb-2">
-                    <span>Số lượng gói:</span>
-                    <span id="modal-item-count" class="text-white font-bold">0</span>
-                </div>
-                <div class="flex justify-between text-sm font-bold text-white pt-2 border-t border-emerald-950">
-                    <span>Tổng số tiền:</span>
-                    <span id="modal-total" class="text-neon text-base">$0.00</span>
-                </div>
-            </div>
-
-            <!-- Payment Methods Mock -->
-            <div class="space-y-3 mb-6">
-                <label class="block text-xs font-bold text-emerald-400 uppercase">Phương Thức Thanh Toán</label>
-                <div class="grid grid-cols-2 gap-3">
-                    <button type="button" class="border-2 border-[#00ff66] bg-emerald-950/60 p-3 rounded-xl flex items-center space-x-2 text-white font-bold text-xs">
-                        <i class="fa-solid fa-qrcode text-neon text-lg"></i>
-                        <span>Quét Mã QR</span>
-                    </button>
-                    <button type="button" class="border border-emerald-900 bg-[#070f09] hover:border-emerald-600 p-3 rounded-xl flex items-center space-x-2 text-slate-300 font-bold text-xs">
-                        <i class="fa-brands fa-paypal text-blue-400 text-lg"></i>
-                        <span>PayPal / Card</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Simulated Confirm Button -->
-            <button onclick="processPayment()" id="pay-now-btn" class="w-full neon-glow-btn py-3.5 rounded-xl font-extrabold text-sm flex items-center justify-center space-x-2">
-                <i class="fa-solid fa-lock"></i>
-                <span>HOÀN TẤT ĐẶT HÀNG</span>
-            </button>
+        <div class="card featured">
+            <div class="badge">BEST VALUE</div>
+            <div class="card-title">altarlesmp plugin++</div>
+            <div class="price">$100.00 <span>/ Lifetime</span></div>
+            <ul class="features">
+                <li>Custom Armor</li>
+                <li>Custom Weapons</li>
+                <li>Texture Pack</li>
+            </ul>
+            <button class="btn" onclick="addToCart('altarlesmp plugin++', 100.00)">Add To Cart</button>
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#0d1f14] border-2 border-[#00ff66] text-white px-6 py-3 rounded-xl shadow-[0_0_25px_rgba(0,255,102,0.4)] flex items-center space-x-3 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none">
-        <i class="fa-solid fa-circle-check text-neon text-xl"></i>
-        <span id="toast-message" class="text-sm font-semibold">Đã thêm vào giỏ hàng!</span>
+    <div id="toast" class="cart-toast">
+        <span id="toast-message">Added to cart!</span>
     </div>
-
-    <!-- FOOTER -->
-    <footer class="border-t border-emerald-950 bg-[#040a06] py-8 text-center text-xs text-slate-500">
-        <div class="max-w-7xl mx-auto px-4">
-            <p class="mb-2">© 2026 <span class="text-emerald-400 font-bold">AltarleSMP Server</span>. Not affiliated with Mojang AB or Microsoft.</p>
-            <p>Designed with Emerald Neon Theme for Minecraft Community.</p>
-        </div>
-    </footer>
 
     <script>
-        // --- GLOBAL STATE ---
-        let cart = [];
-        let currentUsername = "Niko064255";
+        const usernameInput = document.getElementById('username');
+        const playerAvatar = document.getElementById('player-avatar');
 
-        // --- DOM ELEMENTS ---
-        const usernameInput = document.getElementById('username-input');
-        const avatarHead = document.getElementById('player-avatar-head');
-        const cartBadge = document.getElementById('cart-badge');
-        const cartDrawer = document.getElementById('cart-drawer');
-        const drawerBackdrop = document.getElementById('drawer-backdrop');
-        const cartItemsContainer = document.getElementById('cart-items-container');
-        const subtotalPriceEl = document.getElementById('subtotal-price');
-        const totalPriceEl = document.getElementById('total-price');
-
-        // --- LISTENERS ---
         usernameInput.addEventListener('input', function () {
-            const val = this.value.trim() || 'Steve';
-            currentUsername = val;
-            
-            // Update Minecraft skin head API
-            avatarHead.src = `https://mc-heads.net/avatar/${val}`;
-            document.getElementById('cart-player-avatar').src = `https://mc-heads.net/avatar/${val}`;
-            document.getElementById('cart-player-name').textContent = val;
+            const name = this.value.trim() || 'Steve';
+            playerAvatar.src = `https://mc-heads.net/avatar/${name}`;
         });
 
-        // --- CART FUNCTIONS ---
-        function addToCart(packageName, price, details) {
-            // Check if item already exists in cart
-            const existingIndex = cart.findIndex(item => item.name === packageName);
-            
-            if (existingIndex > -1) {
-                cart[existingIndex].qty += 1;
-            } else {
-                cart.push({
-                    name: packageName,
-                    price: price,
-                    details: details,
-                    qty: 1
-                });
-            }
-
-            updateCartUI();
-            showToast(`Đã thêm gói <b>${packageName}</b> vào giỏ!`);
-            toggleCartDrawer(true);
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
-
-        function updateQuantity(index, delta) {
-            if (cart[index]) {
-                cart[index].qty += delta;
-                if (cart[index].qty <= 0) {
-                    cart.splice(index, 1);
-                }
-            }
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            // Update Total Items Count Badge
-            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-            cartBadge.textContent = totalCount;
-
-            // Render Cart Items
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = `
-                    <div class="text-center py-10 text-slate-500">
-                        <i class="fa-solid fa-cart-flatbed text-4xl mb-3 text-emerald-950"></i>
-                        <p class="text-sm font-semibold">Giỏ hàng của bạn đang trống</p>
-                    </div>
-                `;
-            } else {
-                cartItemsContainer.innerHTML = cart.map((item, idx) => `
-                    <div class="bg-[#0d1f14] border border-emerald-900/60 rounded-xl p-3.5 flex items-center justify-between">
-                        <div class="flex-grow pr-3">
-                            <h4 class="text-white font-bold text-sm mb-1">${item.name}</h4>
-                            <p class="text-[11px] text-emerald-400/80 mb-2">${item.details}</p>
-                            <span class="text-neon font-black font-heading text-sm">$${(item.price * item.qty).toFixed(2)}</span>
-                        </div>
-                        <div class="flex flex-col items-end space-y-2">
-                            <button onclick="removeFromCart(${idx})" class="text-slate-500 hover:text-red-400 text-xs transition-colors">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                            <div class="flex items-center space-x-2 bg-[#070f09] border border-emerald-900 rounded-lg px-2 py-1">
-                                <button onclick="updateQuantity(${idx}, -1)" class="text-emerald-400 text-xs hover:text-white font-bold px-1">-</button>
-                                <span class="text-xs text-white font-bold px-1">${item.qty}</span>
-                                <button onclick="updateQuantity(${idx}, 1)" class="text-emerald-400 text-xs hover:text-white font-bold px-1">+</button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            // Calculate Subtotal and Total
-            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            subtotalPriceEl.textContent = `$${total.toFixed(2)}`;
-            totalPriceEl.textContent = `$${total.toFixed(2)} USD`;
-        }
-
-        // --- DRAWER TOGGLE ---
-        function toggleCartDrawer(open) {
-            if (open) {
-                drawerBackdrop.classList.remove('opacity-0', 'pointer-events-none');
-                cartDrawer.classList.remove('translate-x-full');
-            } else {
-                drawerBackdrop.classList.add('opacity-0', 'pointer-events-none');
-                cartDrawer.classList.add('translate-x-full');
-            }
-        }
-
-        function focusUsernameInput() {
-            toggleCartDrawer(false);
-            usernameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            usernameInput.focus();
-        }
-
-        // --- CHECKOUT MODAL LOGIC ---
-        function openCheckoutModal() {
-            if (cart.length === 0) {
-                showToast("Giỏ hàng rỗng! Vui lòng chọn gói mua.");
-                return;
-            }
-
-            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-
-            document.getElementById('modal-player').textContent = currentUsername || 'Steve';
-            document.getElementById('modal-item-count').textContent = totalCount;
-            document.getElementById('modal-total').textContent = `$${total.toFixed(2)} USD`;
-
-            document.getElementById('checkout-modal').classList.remove('hidden');
-        }
-
-        function closeCheckoutModal() {
-            document.getElementById('checkout-modal').classList.add('hidden');
-        }
-
-        function processPayment() {
-            const btn = document.getElementById('pay-now-btn');
-            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> <span>ĐANG XỬ LÝ...</span>`;
-            
-            setTimeout(() => {
-                btn.innerHTML = `<i class="fa-solid fa-check"></i> <span>MUA HÀNG THÀNH CÔNG!</span>`;
-                showToast("Thanh toán thành công! Lệnh trao vật phẩm đã gửi đến server.");
-                
-                setTimeout(() => {
-                    cart = [];
-                    updateCartUI();
-                    closeCheckoutModal();
-                    toggleCartDrawer(false);
-                    btn.innerHTML = `<i class="fa-solid fa-lock"></i> <span>HOÀN TẤT ĐẶT HÀNG</span>`;
-                }, 1500);
-            }, 1800);
-        }
-
-        // --- UTILS ---
-        function showToast(msg) {
+        function addToCart(packageName, price) {
+            const player = usernameInput.value.trim() || 'Steve';
             const toast = document.getElementById('toast');
-            document.getElementById('toast-message').innerHTML = msg;
-            toast.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+            const toastMsg = document.getElementById('toast-message');
+
+            toastMsg.innerHTML = `Added <b>${packageName}</b> ($${price}) for player <b>${player}</b>!`;
+            toast.style.display = 'flex';
 
             setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+                toast.style.display = 'none';
             }, 3000);
         }
-
-        function copyServerIP() {
-            const ipText = "play.altarlesmp.net";
-            const tempInput = document.createElement("input");
-            tempInput.value = ipText;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-
-            const ipSpan = document.getElementById('ip-text');
-            const originalText = ipSpan.textContent;
-            ipSpan.textContent = "Đã copy IP!";
-            showToast("Đã sao chép IP Server: <b>play.altarlesmp.net</b>");
-            
-            setTimeout(() => {
-                ipSpan.textContent = originalText;
-            }, 2000);
-        }
-
-        // Init
-        updateCartUI();
     </script>
 </body>
 </html>
