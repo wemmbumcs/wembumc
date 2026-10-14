@@ -1,293 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AltarleSMP Store</title>
+    <title>AltarleSMP Store - Official Webstore</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-dark: #030a16;
-            --card-bg: #0a172c;
-            --ocean-blue: #0077ff;
-            --electric-cyan: #00f0ff;
-            --text-primary: #ffffff;
-            --text-secondary: #82a0c8;
-            --border-blue: rgba(0, 170, 255, 0.3);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            --bg-dark: #0f0507;
+            --bg-card: #1f0a10;
+            --bg-card-hover: #2e0f18;
+            --neon-red: #ff1a4d;
+            --red-bright: #ff3366;
+            --crimson-glow: rgba(255, 26, 77, 0.18);
+            --border-neon: rgba(255, 26, 77, 0.3);
         }
 
         body {
             background-color: var(--bg-dark);
-            color: var(--text-primary);
-            min-height: 100vh;
-            padding: 50px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        header {
-            text-align: center;
-            max-width: 800px;
-            width: 100%;
-            margin-bottom: 40px;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: #ffffff;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h1 span {
-            color: var(--electric-cyan);
-        }
-
-        .user-input-box {
-            background: var(--card-bg);
-            border: 2px solid var(--border-blue);
-            border-radius: 14px;
-            padding: 20px 30px;
-            display: inline-flex;
-            align-items: center;
-            gap: 18px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .user-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
-            background: #000;
-            border: 2px solid var(--electric-cyan);
-            image-rendering: pixelated;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 6px;
-        }
-
-        .input-group label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .input-group input {
-            background: var(--bg-dark);
-            border: 1px solid var(--border-blue);
-            color: var(--electric-cyan);
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            outline: none;
-            width: 220px;
-        }
-
-        .store-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            max-width: 1150px;
-            width: 100%;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 2px solid var(--border-blue);
-            border-radius: 18px;
-            padding: 35px 28px;
-            width: 320px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
-        }
-
-        .card.featured {
-            border-color: var(--electric-cyan);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.25);
-        }
-
-        .badge {
-            position: absolute;
-            top: -14px;
-            background: var(--electric-cyan);
-            color: #030a16;
-            padding: 5px 18px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            border-radius: 20px;
-            text-transform: uppercase;
-        }
-
-        .card-title {
-            font-size: 1.45rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #ffffff;
-            text-align: center;
-        }
-
-        .card.featured .card-title {
-            color: var(--electric-cyan);
-        }
-
-        .price {
-            font-size: 2.3rem;
-            font-weight: 800;
-            margin-bottom: 22px;
-            color: #ffffff;
-        }
-
-        .price span {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: normal;
-        }
-
-        .features {
-            list-style: none;
-            width: 100%;
-            margin-bottom: 30px;
-            flex-grow: 1;
-        }
-
-        .features li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            color: #c0d4ed;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .features li::before {
-            content: "✓";
-            color: var(--electric-cyan);
-            font-weight: bold;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            background: var(--ocean-blue);
-            color: #ffffff;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .card.featured .btn {
-            background: var(--electric-cyan);
-            color: #030a16;
-        }
-
-        .cart-toast {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: var(--card-bg);
-            border: 2px solid var(--electric-cyan);
-            color: #fff;
-            padding: 16px 28px;
-            border-radius: 12px;
-            display: none;
-            align-items: center;
-            gap: 14px;
-            z-index: 1000;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>AltarleSMP <span>Store</span></h1>
-        
-        <div class="user-input-box">
-            <img id="player-avatar" class="user-avatar" src="https://mc-heads.net/avatar/Niko064255" alt="Skin Head">
-            <div class="input-group">
-                <label for="username">Minecraft Username</label>
-                <input type="text" id="username" value="Niko064255" placeholder="Enter username...">
-            </div>
-        </div>
-    </header>
-
-    <div class="store-container">
-        <div class="card">
-            <div class="card-title">altarlesmp plugin</div>
-            <div class="price">$19.00 <span>/ Lifetime</span></div>
-            <ul class="features">
-                <li>Custom Armor</li>
-            </ul>
-            <button class="btn" onclick="addToCart('altarlesmp plugin', 19.00)">Add To Cart</button>
-        </div>
-
-        <div class="card">
-            <div class="card-title">altarlesmp plugin+</div>
-            <div class="price">$30.00 <span>/ Lifetime</span></div>
-            <ul class="features">
-                <li>Custom Weapons</li>
-            </ul>
-            <button class="btn" onclick="addToCart('altarlesmp plugin+', 30.00)">Add To Cart</button>
-        </div>
-
-        <div class="card featured">
-            <div class="badge">BEST VALUE</div>
-            <div class="card-title">altarlesmp plugin++</div>
-            <div class="price">$100.00 <span>/ Lifetime</span></div>
-            <ul class="features">
-                <li>Custom Armor</li>
-                <li>Custom Weapons</li>
-                <li>Texture Pack</li>
-            </ul>
-            <button class="btn" onclick="addToCart('altarlesmp plugin++', 100.00)">Add To Cart</button>
-        </div>
-    </div>
-
-    <div id="toast" class="cart-toast">
-        <span id="toast-message">Added to cart!</span>
-    </div>
-
-    <script>
-        const usernameInput = document.getElementById('username');
-        const playerAvatar = document.getElementById('player-avatar');
-
-        usernameInput.addEventListener('input', function () {
-            const name = this.value.trim() || 'Steve';
-            playerAvatar.src = `https://mc-heads.net/avatar/${name}`;
-        });
-
-        function addToCart(packageName, price) {
-            const player = usernameInput.value.trim() || 'Steve';
-            const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toast-message');
-
-            toastMsg.innerHTML = `Added <b>${packageName}</b> ($${price}) for player <b>${player}</b>!`;
-            toast.style.display = 'flex';
-
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 3000);
-        }
-    </script>
-</body>
-</html>
+            color: #e2e8f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(255, 26, 77, 0.16) 0%, transparent 60%),
+                radial-gradient(circle at 10% 80%, rgba(255, 0, 68, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(255, 26, 77, 0.08) 0%, transparent
